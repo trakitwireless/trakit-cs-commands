@@ -33,6 +33,6 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\objects\Objects.csproj" />
+	  <ProjectReference Include="..\..\trakit-cs-objects\objects\objects.csproj" />
 	</ItemGroup>
 </Project>
