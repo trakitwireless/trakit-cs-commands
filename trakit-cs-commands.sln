@@ -5,7 +5,7 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commands", "commands\Commands.csproj", "{3173A331-4B26-4028-B238-6046BD9D1C2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "objects", "..\trakit-cs-objects\objects\objects.csproj", "{D467102F-6B1C-5BB7-0201-70CD5635FDA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objects", "..\trakit-cs-objects\objects\Objects.csproj", "{D467102F-6B1C-5BB7-0201-70CD5635FDA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
