@@ -8,14 +8,16 @@ namespace Trakit.Tools {
 	/// </summary>
 	public class TrakitSerializer {
 		// settings used by Trak-iT's APIs
-		internal JsonSerializerSettings _settings;
+		JsonSerializerSettings _settings;
 		// used to convert JObjects into Trak-iT classes
-		internal JsonSerializer Newton;
+		JsonSerializer _newton;
 
 		public TrakitSerializer() {
 			_settings = new JsonSerializerSettings() {
 				Formatting = Formatting.None,
 				DateParseHandling = DateParseHandling.None,
+				DateFormatString = Text.DATETIME_FORMAT_ISO8601,
+				DateFormatHandling = DateFormatHandling.IsoDateFormat,
 				DateTimeZoneHandling = DateTimeZoneHandling.Utc,
 				NullValueHandling = NullValueHandling.Ignore,
 			};
@@ -38,7 +40,7 @@ namespace Trakit.Tools {
 			_settings.Converters.Add(new ConvertSelfUser());
 			_settings.Converters.Add(new ConvertErrorDetail());
 
-			this.Newton = JsonSerializer.CreateDefault(_settings);
+			_newton = JsonSerializer.CreateDefault(_settings);
 		}
 
 		/// <summary>
@@ -98,7 +100,7 @@ namespace Trakit.Tools {
 		/// <typeparam name="T">Any type of object, not compatible with structs.</typeparam>
 		/// <param name="token">JSON of the desired <typeparamref name="T">value</typeparamref>.</param>
 		/// <returns>The desired <typeparamref name="T">value</typeparamref>.</returns>
-		public T ConvertFrom<T>(JToken token) => token.ToObject<T>(this.Newton);
+		public T ConvertFrom<T>(JToken token) => token.ToObject<T>(_newton);
 		/// <summary>
 		/// Attempts to converts the given <see cref="JToken"/> into an object abiding by the rules of Trak-iT's APIs.
 		/// </summary>
@@ -118,14 +120,14 @@ namespace Trakit.Tools {
 			return success;
 		}
 		/// <summary>
-		/// Converts the given <c>value</c> into <see cref="JToken"/> abiding by the rules of Trak-iT's APIs.
+		/// Converts the given <paramref name="value"/> into a <see cref="JToken"/> abiding by the rules of Trak-iT's APIs.
 		/// </summary>
 		/// <typeparam name="J">The kind of JSON token being returned.</typeparam>
 		/// <param name="value">The object or struct.</param>
 		/// <returns>The desired <see cref="JToken"/>.</returns>
-		public J ConvertTo<J>(object value) where J : JToken => (J)JToken.FromObject(value, this.Newton);
+		public J ConvertTo<J>(object value) where J : JToken => (J)JToken.FromObject(value, _newton);
 		/// <summary>
-		/// Attempts to converts the given <c>value</c> into <see cref="JToken"/> abiding by the rules of Trak-iT's APIs.
+		/// Attempts to converts the given <paramref name="value"/> into <see cref="JToken"/> abiding by the rules of Trak-iT's APIs.
 		/// </summary>
 		/// <typeparam name="J">The kind of JSON token being returned.</typeparam>
 		/// <param name="value">The object or struct.</param>

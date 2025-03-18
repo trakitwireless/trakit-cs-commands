@@ -8,7 +8,7 @@ namespace Trakit.Tools {
 		/// The full ISO8601 date/time string with seconds and milliseconds.
 		/// All date/time stamps in the Trak-iT APIs are given in UTC unless otherwise specified.
 		/// </summary>
-		public const string DATETIME_FORMAT_ISO8601 = "yyyy-MM-ddTHH:mm:ss.fffZ";
+		public const string DATETIME_FORMAT_ISO8601 = "yyyy-MM-ddTHH:mm:ss.FFFK";
 		/// <summary>
 		/// 
 		/// </summary>
