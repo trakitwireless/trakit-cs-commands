@@ -9,14 +9,6 @@ namespace Trakit.Tools {
 		/// All date/time stamps in the Trak-iT APIs are given in UTC unless otherwise specified.
 		/// </summary>
 		public const string DATETIME_FORMAT_ISO8601 = "yyyy-MM-ddTHH:mm:ss.FFFK";
-		/// <summary>
-		/// 
-		/// </summary>
-		public const string DATE_FORMAT = "yyyy-MM-ddZ";
-		/// <summary>
-		/// 
-		/// </summary>
-		public const string TIME_FORMAT = "HH:mm:ss.fff";
 
 		/// <summary>
 		/// A list of accented characters that need to be swapped for non-accented characters.
