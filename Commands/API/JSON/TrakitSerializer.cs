@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Globalization;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 
@@ -43,6 +44,7 @@ namespace Trakit.Tools {
 			};
 			_writing.Converters.Add(new IsoDateTimeConverter() {
 				DateTimeFormat = Text.DATETIME_FORMAT_ISO8601,
+				DateTimeStyles = DateTimeStyles.None,
 			});
 			_writer = JsonSerializer.CreateDefault(_writing);
 		}
