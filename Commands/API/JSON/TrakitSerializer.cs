@@ -8,39 +8,43 @@ namespace Trakit.Tools {
 	/// </summary>
 	public class TrakitSerializer {
 		// settings used by Trak-iT's APIs
-		JsonSerializerSettings _settings;
+		JsonSerializerSettings _reading, _writing;
 		// used to convert JObjects into Trak-iT classes
-		JsonSerializer _newton;
+		JsonSerializer _reader, _writer;
 
 		public TrakitSerializer() {
-			_settings = new JsonSerializerSettings() {
+			_reading = new JsonSerializerSettings() {
 				Formatting = Formatting.None,
 				DateParseHandling = DateParseHandling.None,
-				DateFormatString = Text.DATETIME_FORMAT_ISO8601,
 				DateFormatHandling = DateFormatHandling.IsoDateFormat,
 				DateTimeZoneHandling = DateTimeZoneHandling.Utc,
 				NullValueHandling = NullValueHandling.Ignore,
 			};
 
-			// Converts a DateTime to and from the ISO 8601 date format (with seconds and milliseconds)
-			_settings.Converters.Add(new IsoDateTimeConverter() {
+			// in general
+			_reading.Converters.Add(new StringEnumConverter());
+			// Trakit.Objects
+			_reading.Converters.Add(new ConvertAsset());
+			_reading.Converters.Add(new ConvertCompany());
+			_reading.Converters.Add(new ConvertProvider());
+			_reading.Converters.Add(new ConvertPlace());
+			_reading.Converters.Add(new ConvertUser());
+			_reading.Converters.Add(new ConvertTimezone());
+			_reading.Converters.Add(new ConvertIPAddress());
+			_reading.Converters.Add(new ConvertIPEndPoint());
+			// Trakit.Commands
+			_reading.Converters.Add(new ConvertSelfUser());
+			_reading.Converters.Add(new ConvertErrorDetail());
+			_reader = JsonSerializer.CreateDefault(_reading);
+
+			// specifically only send DateTimes with 3 digits of presicion, not 7
+			_writing = new JsonSerializerSettings(_reading) {
+				DateFormatString = Text.DATETIME_FORMAT_ISO8601,
+			};
+			_writing.Converters.Add(new IsoDateTimeConverter() {
 				DateTimeFormat = Text.DATETIME_FORMAT_ISO8601,
 			});
-			_settings.Converters.Add(new StringEnumConverter());
-			// Trakit.Objects
-			_settings.Converters.Add(new ConvertAsset());
-			_settings.Converters.Add(new ConvertCompany());
-			_settings.Converters.Add(new ConvertProvider());
-			_settings.Converters.Add(new ConvertPlace());
-			_settings.Converters.Add(new ConvertUser());
-			_settings.Converters.Add(new ConvertTimezone());
-			_settings.Converters.Add(new ConvertIPAddress());
-			_settings.Converters.Add(new ConvertIPEndPoint());
-			// Trakit.Commands
-			_settings.Converters.Add(new ConvertSelfUser());
-			_settings.Converters.Add(new ConvertErrorDetail());
-
-			_newton = JsonSerializer.CreateDefault(_settings);
+			_writer = JsonSerializer.CreateDefault(_writing);
 		}
 
 		/// <summary>
@@ -49,7 +53,7 @@ namespace Trakit.Tools {
 		/// <typeparam name="T">Any object or struct.</typeparam>
 		/// <param name="value">The value to serialize.</param>
 		/// <returns>The serialized value.</returns>
-		public string Serialize<T>(T value) => JsonConvert.SerializeObject(value, _settings);
+		public string Serialize<T>(T value) => JsonConvert.SerializeObject(value, _writing);
 		/// <summary>
 		/// Attempts to serialize the given value that abides the rules of Trak-iT's APIs.
 		/// </summary>
@@ -74,7 +78,7 @@ namespace Trakit.Tools {
 		/// <typeparam name="T">Any object or struct.</typeparam>
 		/// <param name="text">The serialized value.</param>
 		/// <returns>The <typeparamref name="T">object or struct</typeparamref>.</returns>
-		public T Deserialize<T>(string text) => JsonConvert.DeserializeObject<T>(text, _settings);
+		public T Deserialize<T>(string text) => JsonConvert.DeserializeObject<T>(text, _reading);
 		/// <summary>
 		/// Attempts to deserializes the given text into an object abiding by the rules of Trak-iT's APIs.
 		/// </summary>
@@ -100,7 +104,7 @@ namespace Trakit.Tools {
 		/// <typeparam name="T">Any type of object, not compatible with structs.</typeparam>
 		/// <param name="token">JSON of the desired <typeparamref name="T">value</typeparamref>.</param>
 		/// <returns>The desired <typeparamref name="T">value</typeparamref>.</returns>
-		public T ConvertFrom<T>(JToken token) => token.ToObject<T>(_newton);
+		public T ConvertFrom<T>(JToken token) => token.ToObject<T>(_reader);
 		/// <summary>
 		/// Attempts to converts the given <see cref="JToken"/> into an object abiding by the rules of Trak-iT's APIs.
 		/// </summary>
@@ -108,7 +112,7 @@ namespace Trakit.Tools {
 		/// <param name="token">JSON of the desired <typeparamref name="T">value</typeparamref>.</param>
 		/// <param name="value">The desired <typeparamref name="T">value</typeparamref>.</param>
 		/// <returns>True when successful.</returns>
-		public bool TryDeconvert<T>(JToken token, out T value) {
+		public bool TryConvertFrom<T>(JToken token, out T value) {
 			bool success;
 			try {
 				value = this.ConvertFrom<T>(token);
@@ -125,7 +129,7 @@ namespace Trakit.Tools {
 		/// <typeparam name="J">The kind of JSON token being returned.</typeparam>
 		/// <param name="value">The object or struct.</param>
 		/// <returns>The desired <see cref="JToken"/>.</returns>
-		public J ConvertTo<J>(object value) where J : JToken => (J)JToken.FromObject(value, _newton);
+		public J ConvertTo<J>(object value) where J : JToken => (J)JToken.FromObject(value, _writer);
 		/// <summary>
 		/// Attempts to converts the given <paramref name="value"/> into <see cref="JToken"/> abiding by the rules of Trak-iT's APIs.
 		/// </summary>
@@ -133,7 +137,7 @@ namespace Trakit.Tools {
 		/// <param name="value">The object or struct.</param>
 		/// <param name="token">The desired <see cref="JToken"/>.</param>
 		/// <returns>True when successful.</returns>
-		public bool TryConvert<J>(object value, out J token) where J : JToken {
+		public bool TryConvertTo<J>(object value, out J token) where J : JToken {
 			bool success;
 			try {
 				token = this.ConvertTo<J>(value);
