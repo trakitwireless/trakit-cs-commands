@@ -20,13 +20,13 @@ namespace Trakit.Commands {
 		/// </summary>
 		/// <returns></returns>
 		public async Task<RepSelfGet> GetSelfDetails() {
-			var response = await this.Command<RepSelfGet>(new PaySelfGet());
-			switch (response.errorCode) {
+			var reply = await this.Command<RepSelfGet>(new PaySelfGet());
+			switch (reply.errorCode) {
 				case ErrorCode.success:
 				case ErrorCode.passwordExpired:
 				case ErrorCode.sessionExpired:
 				case ErrorCode.userNotLoggedIn:
-					this.Self = response;
+					this.Self = reply;
 					break;
 				default:
 					this.Self = default;
@@ -59,15 +59,15 @@ namespace Trakit.Commands {
 		/// </summary>
 		/// <returns></returns>
 		public async Task<RepSelfLogout> Logout() {
-			var response = await this.Command<RepSelfLogout>(new PaySelfLogout());
-			switch (response.errorCode) {
+			var reply = await this.Command<RepSelfLogout>(new PaySelfLogout());
+			switch (reply.errorCode) {
 				case ErrorCode.success:
 				case ErrorCode.sessionExpired:
 					this.SetAuth();
 					this.Self = default;
 					break;
 			}
-			return response;
+			return reply;
 		}
 
 		/// <summary>

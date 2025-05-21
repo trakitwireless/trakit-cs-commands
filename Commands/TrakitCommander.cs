@@ -91,9 +91,9 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Sends a command to the underlying service, and returns a <see cref="Task"/> that completes when a reply is received.
 		/// </summary>
-		/// <typeparam name="TResponse"></typeparam>
-		/// <param name="request"></param>
+		/// <typeparam name="TReply"></typeparam>
+		/// <param name="payload"></param>
 		/// <returns></returns>
-		public abstract Task<TResponse> Command<TResponse>(Payload request);
+		public abstract Task<TReply> Command<TReply>(Payload payload);
 	}
 }

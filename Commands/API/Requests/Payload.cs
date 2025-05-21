@@ -12,10 +12,10 @@ namespace Trakit.Commands {
 	/// Child classes should contain members required to execute a command.
 	/// </remarks>
 	public class Payload {
-		/// Used to split the Request class name into pieces to help create commands
+		/// Used to split the Payload class name into pieces to help create commands
 		static readonly Regex SPLITTER = new Regex("Pay([A-Z][a-z]+)+?((?:Batch)?(?:Get|List|Merge|Delete|Restore|Suspend|Revive|Cancel|Change))(By.+)?", RegexOptions.Compiled);
 		/// <summary>
-		/// Splits this class' name into parts helpful to <see cref="TrakitCommander{TClient}.Command{TResponse}(Payload)"/>.
+		/// Splits this class' name into parts helpful to <see cref="TrakitCommander{TClient}.Command{TReply}(Payload)"/>.
 		/// </summary>
 		/// <returns></returns>
 		public string[] GetNameParts() => SPLITTER.Match(this.GetType().Name)
