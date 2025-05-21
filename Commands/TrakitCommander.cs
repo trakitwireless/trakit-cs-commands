@@ -94,6 +94,6 @@ namespace Trakit.Commands {
 		/// <typeparam name="TResponse"></typeparam>
 		/// <param name="request"></param>
 		/// <returns></returns>
-		public abstract Task<TResponse> Command<TResponse>(Request request);
+		public abstract Task<TResponse> Command<TResponse>(Payload request);
 	}
 }

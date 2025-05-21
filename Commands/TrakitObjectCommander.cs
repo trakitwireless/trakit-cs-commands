@@ -12,15 +12,15 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Details of the <see cref="User"/> or <see cref="Machine"/> who is connected to the underlying Trak-iT API service.
 		/// </summary>
-		public RespSelfGet Self { get; protected set; }
+		public RepSelfGet Self { get; protected set; }
 
 		#region Commands - Self
 		/// <summary>
 		/// Requests the details of the <see cref="User"/> or <see cref="Machine"/> currently identified.
 		/// </summary>
 		/// <returns></returns>
-		public async Task<RespSelfGet> GetSelfDetails() {
-			var response = await this.Command<RespSelfGet>(new ReqSelfGet());
+		public async Task<RepSelfGet> GetSelfDetails() {
+			var response = await this.Command<RepSelfGet>(new PaySelfGet());
 			switch (response.errorCode) {
 				case ErrorCode.success:
 				case ErrorCode.passwordExpired:
@@ -43,8 +43,8 @@ namespace Trakit.Commands {
 		/// <param name="password">Your password.</param>
 		/// <param name="userAgent">Optional string to identify this software.</param>
 		/// <returns>The <see cref="RespSelfGet"/>, which contains a <see cref="SelfUser"/> when successful.</returns>
-		public async Task<RespSelfGet> Login(string username, string password, string userAgent = default) {
-			this.Self = await this.Command<RespSelfGet>(new ReqSelfLogin() {
+		public async Task<RepSelfGet> Login(string username, string password, string userAgent = default) {
+			this.Self = await this.Command<RepSelfGet>(new PaySelfLogin() {
 				username = username,
 				password = password,
 				userAgent = userAgent,
@@ -58,8 +58,8 @@ namespace Trakit.Commands {
 		/// Sends a logout command, and if successful, removes the current session using <see cref="SetAuth()"/>.
 		/// </summary>
 		/// <returns></returns>
-		public async Task<RespSelfLogout> Logout() {
-			var response = await this.Command<RespSelfLogout>(new ReqSelfLogout());
+		public async Task<RepSelfLogout> Logout() {
+			var response = await this.Command<RepSelfLogout>(new PaySelfLogout());
 			switch (response.errorCode) {
 				case ErrorCode.success:
 				case ErrorCode.sessionExpired:
@@ -86,7 +86,7 @@ namespace Trakit.Commands {
 		/// <param name="roles"></param>
 		/// <param name="pictures"></param>
 		/// <returns></returns>
-		public Task<Response> UpdateContact(
+		public Task<Reply> UpdateContact(
 			string name,
 			string notes,
 			Dictionary<string, string> otherNames,
@@ -98,7 +98,7 @@ namespace Trakit.Commands {
 			Dictionary<string, string> options,
 			List<string> roles,
 			List<ulong> pictures
-		) => this.Command<Response>(new ReqSelfContact() {
+		) => this.Command<Reply>(new PaySelfContact() {
 			contact = new ParamSelfContactMerge() {
 				name = name,
 				notes = notes,
@@ -119,10 +119,10 @@ namespace Trakit.Commands {
 		/// <param name="oldPassword">Your current password, as verification that you are the account owner.</param>
 		/// <param name="newPassword">Your new password must conform to your company's <see cref="PasswordPolicy"/>.</param>
 		/// <returns></returns>
-		public Task<RespSelfPasswordMerge> UpdatePassword(
+		public Task<RepSelfPasswordMerge> UpdatePassword(
 			string oldPassword,
 			string newPassword
-		) => this.Command<RespSelfPasswordMerge>(new ReqSelfPassword() {
+		) => this.Command<RepSelfPasswordMerge>(new PaySelfPassword() {
 			current = oldPassword,
 			password = newPassword,
 		});
@@ -136,14 +136,14 @@ namespace Trakit.Commands {
 		/// <param name="measurements"></param>
 		/// <param name="options"></param>
 		/// <returns></returns>
-		public Task<Response> UpdatePreferences(
+		public Task<Reply> UpdatePreferences(
 			string language,
 			TimeZoneInfo timezone,
 			List<UserNotifications> notify,
 			Dictionary<string, string> formats,
 			Dictionary<string, SystemsOfUnits?> measurements,
 			Dictionary<string, string> options
-		) => this.Command<Response>(new ReqSelfPreferences() {
+		) => this.Command<Reply>(new PaySelfPreferences() {
 			language = language,
 			timezone = timezone,
 			notify = notify,
