@@ -9,14 +9,16 @@ namespace Trakit.Commands {
 	public class ParamFormResultMerge : ParamMergeSubscribable {
 		/// <summary>
 		/// The unique identifier of the <see cref="FormResult"/> you want to update.
-		/// Leave this as <c>null</c> when creating a new <see cref="FormResult"/>.
 		/// </summary>
 		public ulong? id;
 		/// <summary>
-		/// The <see cref="Company"/> to which this <see cref="FormResult"/> belongs.
-		/// After creation, this value is read-only.
+		/// The unique identifier of the <see cref="Asset"/> filling out this form.
 		/// </summary>
-		public ulong? company;
+		public ulong? asset;
+		/// <summary>
+		/// The unique identifier of the <see cref="FormTemplate"/> for this form.
+		/// </summary>
+		public ulong? template;
 		/// <summary>
 		/// Name for the <see cref="FormResult"/>.
 		/// </summary>
@@ -26,53 +28,21 @@ namespace Trakit.Commands {
 		/// </summary>
 		public string notes;
 		/// <summary>
-		/// A collection of other names this person might go by.
-		/// Use the object key like a name identifier.
-		/// Example keys: Initials, Nickname, Maiden Name, etc.
+		/// Codified label names used to relate forms to <see cref="Asset"/>s.
 		/// </summary>
-		public Dictionary<string, string> otherNames;
+		public List<string> labels;
 		/// <summary>
-		/// Email addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Support, Old, etc.
+		/// A collection of values for the <see cref="FormResult.fields"/>.
+		/// You can update parts of the collection, the <see cref="FormResult"/> must have a value for all fields in order to complete it.
 		/// </summary>
-		public Dictionary<string, string> emails;
+		public Dictionary<ulong, string> fields;
 		/// <summary>
-		/// Phone numbers.
-		/// Use the object key like a name of the phone number.
-		/// Example keys: Mobile, Fax, Home, Office, etc.
+		/// A timestamp from when the <see cref="FormResult"/> was completed.
 		/// </summary>
-		public Dictionary<string, ulong?> phones;
+		public DateTime? completed;
 		/// <summary>
-		/// Mailing addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Park, etc.
+		/// Coordinates from when the <see cref="FormResult"/> was completed.
 		/// </summary>
-		public Dictionary<string, string> addresses;
-		/// <summary>
-		/// Websites and other online resources
-		/// Use the object key like a name of the address.
-		/// Example keys: Downloads, Support, FTP, etc.
-		/// </summary>
-		public Dictionary<string, Uri> urls;
-		/// <summary>
-		/// Date information
-		/// Use the object key like a name of the date.
-		/// Example keys: Birthday, Started Date, Retired On, etc.
-		/// </summary>
-		public Dictionary<string, DateTime?> dates;
-		/// <summary>
-		/// Uncategorized information
-		/// Use the object keys and values however you'd like.
-		/// </summary>
-		public Dictionary<string, string> options;
-		/// <summary>
-		/// A list of roles they play in the <see cref="Company"/>.
-		/// </summary>
-		public List<string> roles;
-		/// <summary>
-		/// <see cref="Picture"/>s of this <see cref="FormResult"/>.
-		/// </summary>
-		public List<ulong> pictures;
+		public LatLng latlng;
 	}
 }

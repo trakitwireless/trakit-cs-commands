@@ -9,7 +9,6 @@ namespace Trakit.Commands {
 	public class ParamDocumentMerge : ParamMergeSubscribable {
 		/// <summary>
 		/// The unique identifier of the <see cref="Document"/> you want to update.
-		/// Leave this as <c>null</c> when creating a new <see cref="Document"/>.
 		/// </summary>
 		public ulong? id;
 		/// <summary>
@@ -18,61 +17,21 @@ namespace Trakit.Commands {
 		/// </summary>
 		public ulong? company;
 		/// <summary>
-		/// Name for the <see cref="Document"/>.
+		/// The file name of this <see cref="Document"/>.
 		/// </summary>
 		public string name;
 		/// <summary>
-		/// Notes for the <see cref="Document"/>.
+		/// Notes about this <see cref="Document"/>.
 		/// </summary>
 		public string notes;
 		/// <summary>
-		/// A collection of other names this person might go by.
-		/// Use the object key like a name identifier.
-		/// Example keys: Initials, Nickname, Maiden Name, etc.
+		/// The time at which the <see cref="Document"/> will automatically be purged from the system.
 		/// </summary>
-		public Dictionary<string, string> otherNames;
+		public DateTime? expiry;
 		/// <summary>
-		/// Email addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Support, Old, etc.
+		/// Name/value collections of custom fields used to refer to external systems.
+		/// If the value is null, the references are removed from the <see cref="Document"/>.
 		/// </summary>
-		public Dictionary<string, string> emails;
-		/// <summary>
-		/// Phone numbers.
-		/// Use the object key like a name of the phone number.
-		/// Example keys: Mobile, Fax, Home, Office, etc.
-		/// </summary>
-		public Dictionary<string, ulong?> phones;
-		/// <summary>
-		/// Mailing addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Park, etc.
-		/// </summary>
-		public Dictionary<string, string> addresses;
-		/// <summary>
-		/// Websites and other online resources
-		/// Use the object key like a name of the address.
-		/// Example keys: Downloads, Support, FTP, etc.
-		/// </summary>
-		public Dictionary<string, Uri> urls;
-		/// <summary>
-		/// Date information
-		/// Use the object key like a name of the date.
-		/// Example keys: Birthday, Started Date, Retired On, etc.
-		/// </summary>
-		public Dictionary<string, DateTime?> dates;
-		/// <summary>
-		/// Uncategorized information
-		/// Use the object keys and values however you'd like.
-		/// </summary>
-		public Dictionary<string, string> options;
-		/// <summary>
-		/// A list of roles they play in the <see cref="Company"/>.
-		/// </summary>
-		public List<string> roles;
-		/// <summary>
-		/// <see cref="Picture"/>s of this <see cref="Document"/>.
-		/// </summary>
-		public List<ulong> pictures;
+		public Dictionary<string, string> references;
 	}
 }
