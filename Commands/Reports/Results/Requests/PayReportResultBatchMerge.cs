@@ -8,6 +8,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// 
 		/// </summary>
-		public List<ParamReportOptions> reportResults { get; set; }
+		public List<ParamReportResultMerge> reportResults { get; set; }
 	}
 }

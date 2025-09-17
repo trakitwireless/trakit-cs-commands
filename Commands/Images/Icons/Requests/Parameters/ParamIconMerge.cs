@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Trakit.Objects;
 
 namespace Trakit.Commands {
@@ -28,7 +27,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// A noun to describe the type of thing represented.  Like Truck, Car, Trailer, Hot-Air Balloon, etc...
 		/// </summary>
-		/// <override max-length="100" />
 		public string category;
 		/// <summary>
 		/// Indicates whether this <see cref="Icon"/> is available to child companies.

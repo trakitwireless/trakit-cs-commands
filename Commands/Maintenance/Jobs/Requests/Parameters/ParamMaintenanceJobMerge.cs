@@ -15,7 +15,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The identifier of the <see cref="Asset"/> to which this <see cref="MaintenanceJob"/> is assigned.
 		/// </summary>
-		/// <override required="create" />
 		public ulong? asset;
 		/// <summary>
 		/// The <see cref="MaintenanceSchedule"/> from which this job was created
@@ -25,7 +24,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The work being done. Like "oil change".
 		/// </summary>
-		/// <override required="create" max-length="100" />
 		public string name;
 		/// <summary>
 		/// Notes about the <see cref="MaintenanceJob"/>.  Like "changed the oil and filter".
@@ -38,7 +36,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// When was this <see cref="MaintenanceJob"/> created.
 		/// </summary>
-		/// <override value="current time" />
 		public DateTime? created;
 		/// <summary>
 		/// When was this <see cref="MaintenanceJob"/> created.
@@ -57,7 +54,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The name of the garage or service facility where the work is done.
 		/// </summary>
-		/// <override max-length="100" />
 		public string garage;
 		/// <summary>
 		/// Time it took to complete the <see cref="MaintenanceJob"/>.
@@ -70,21 +66,14 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// A reference code used to track this <see cref="MaintenanceJob"/>.
 		/// </summary>
-		/// <override max-length="100" />
 		public string reference;
 		/// <summary>
 		/// The mechanic who performed the work.
 		/// </summary>
-		/// <override max-length="100" />
 		public string technician;
 		/// <summary>
 		/// <see cref="Picture"/>s taken while performing the work for reference.
 		/// </summary>
-		/// <override>
-		/// <values>
-		/// <seealso cref="Picture.id" />
-		/// </values>
-		/// </override>
 		public List<ulong> pictures;
 	}
 }

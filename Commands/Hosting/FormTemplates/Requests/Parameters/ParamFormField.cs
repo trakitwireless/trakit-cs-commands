@@ -21,7 +21,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The type of interface control that should be presented to the user.
 		/// </summary>
-		/// <override required="create" />
 		public FormFieldType? kind;
 		/// <summary>
 		/// Notes or special instructions for this control.
@@ -129,7 +128,6 @@ namespace Trakit.Commands {
 		/// or will be a <format id="datetime"/> representing the earliest possible <see cref="FormFieldTime">time or smallest duration</see>.
 		/// Note that dates and times should not be sent assuming it will be converted to UTC, and form fields do not enforce a timezone.
 		/// </summary>
-		/// <override readonly="false" />
 		[JsonProperty("minimum", NullValueHandling = NullValueHandling.Ignore)]
 		public object _minimum {
 			get => this.minInt ?? this.minFloat ?? (object)this.minTime ?? this.minDate;
@@ -163,7 +161,6 @@ namespace Trakit.Commands {
 		/// or will be a <format id="datetime"/> representing thee latest possible <see cref="FormFieldTime">time or largest duration</see>.
 		/// Note that dates and times should not be sent assuming it will be converted to UTC, and form fields do not enforce a timezone.
 		/// </summary>
-		/// <override readonly="false" />
 		[JsonProperty("maximum", NullValueHandling = NullValueHandling.Ignore)]
 		public object _maximum {
 			get => this.maxInt ?? this.maxFloat ?? (object)this.maxTime ?? this.maxDate;
@@ -195,7 +192,6 @@ namespace Trakit.Commands {
 		/// Will be a <see cref="FormFieldChoice.choices">dictionary of strings</see> for choice/drop-down fields,
 		/// or will be a <see cref="FormFieldBoolean.choices">array of strings</see> for checkbox/toggle-switch fields.
 		/// </summary>
-		/// <override readonly="false" />
 		[JsonProperty("choices", NullValueHandling = NullValueHandling.Ignore)]
 		public object _choices {
 			get => this.choiceBoolean ?? (object)this.choiceDropdown;

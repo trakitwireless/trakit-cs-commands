@@ -9,18 +9,15 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The unique identifier of the <see cref="FormTemplate"/> you want to update.
 		/// </summary>
-		/// <override required="update" />
 		public ulong? id;
 		/// <summary>
 		/// The <see cref="Company"/> to which this <see cref="FormTemplate"/> belongs.
 		/// After creation, this value is read-only.
 		/// </summary>
-		/// <override required="create" />
 		public ulong? company;
 		/// <summary>
 		/// Name for the <see cref="FormTemplate"/>.
 		/// </summary>
-		/// <override max-length="100" />
 		public string name;
 		/// <summary>
 		/// Notes for the <see cref="FormTemplate"/>.
@@ -38,17 +35,14 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Background and fill colour in the UI.
 		/// </summary>
-		/// <override max-length="22" format="colour" />
 		public string fill;
 		/// <summary>
 		/// Text and outline colour in the UI.
 		/// </summary>
-		/// <override max-length="22" format="colour" />
 		public string stroke;
 		/// <summary>
 		/// The name of the symbol shown in the UI.
 		/// </summary>
-		/// <override max-length="22" format="colour" />
 		public string graphic;
 	}
 }

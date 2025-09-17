@@ -398,7 +398,6 @@ namespace Trakit.Commands {
 		/// <remarks>
 		/// For GatekeeperType commands only.
 		/// </remarks>
-		/// <override skip="true" />
 		invalidHash,
 		/// <summary sort="Providers and Configurations">
 		/// Unknown or invalid <see cref="ProviderRegistration.code"/>.
@@ -406,7 +405,6 @@ namespace Trakit.Commands {
 		/// <remarks>
 		/// Used exclusively by the provisioning service.
 		/// </remarks>
-		/// <override skip="true" />
 		invalidVerification,
 		/// <summary sort="Providers and Configurations">
 		/// <see cref="ProviderRegistration"/> timeout has elapsed.
@@ -532,13 +530,11 @@ namespace Trakit.Commands {
 		/// <summary sort="Billing">
 		/// <see cref="BillableHostingDiscount"/> not found.
 		/// </summary>
-		/// <override skip="true" />
 		[Obsolete("Never implemented.")]
 		hostingDiscountNotFound,
 		/// <summary sort="Billing">
 		/// <see cref="BillableHostingDiscount"/> not deleted.
 		/// </summary>
-		/// <override skip="true" />
 		[Obsolete("Never implemented.")]
 		hostingDiscountNotDeleted,
 		/// <summary sort="Billing">

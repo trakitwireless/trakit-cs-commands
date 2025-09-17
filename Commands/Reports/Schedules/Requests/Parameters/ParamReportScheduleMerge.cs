@@ -13,41 +13,66 @@ namespace Trakit.Commands {
 		/// </summary>
 		public ulong? id;
 		/// <summary>
-		/// Identifier of the <see cref="ReportTemplate"/> used to help create results.
+		/// The <see cref="Company"/> to which this <see cref="ReportSchedule"/> belongs.
+		/// After creation, this value is read-only.
 		/// </summary>
-		/// <override required="create" />
-		public ulong? template;
+		public ulong? company;
 		/// <summary>
 		/// Name for the <see cref="ReportSchedule"/>.
 		/// </summary>
-		/// <override required="create" max-length="100" />
 		public string name;
 		/// <summary>
 		/// Notes for the <see cref="ReportSchedule"/>.
 		/// </summary>
 		public string notes;
 		/// <summary>
-		/// The user which owns the schedule.
-		/// When report results are created, they will be created with this user's <see cref="Asset"/> permissions.
+		/// A collection of other names this person might go by.
+		/// Use the object key like a name identifier.
+		/// Example keys: Initials, Nickname, Maiden Name, etc.
 		/// </summary>
-		/// <override required="create" format="email" />
-		public string owner;
+		public Dictionary<string, string> otherNames;
 		/// <summary>
-		/// Indicates whether this schedule is allowed to run.
+		/// Email addresses
+		/// Use the object key like a name of the address.
+		/// Example keys: Home, Work, Support, Old, etc.
 		/// </summary>
-		public bool? enabled;
+		public Dictionary<string, string> emails;
 		/// <summary>
-		/// The recurring schedule to generate report results.
+		/// Phone numbers.
+		/// Use the object key like a name of the phone number.
+		/// Example keys: Mobile, Fax, Home, Office, etc.
 		/// </summary>
-		/// <override required="create" />
-		public ParamReportRecurrence repetition;
+		public Dictionary<string, ulong?> phones;
 		/// <summary>
-		/// Specified parameters for the report logic, targeted <see cref="Asset"/>s, and filtering Places.
+		/// Mailing addresses
+		/// Use the object key like a name of the address.
+		/// Example keys: Home, Work, Park, etc.
 		/// </summary>
-		public ParamReportOptions options;
+		public Dictionary<string, string> addresses;
 		/// <summary>
-		/// A list of users and a targeting expression for <see cref="Asset"/>s which receive report results notifications.
+		/// Websites and other online resources
+		/// Use the object key like a name of the address.
+		/// Example keys: Downloads, Support, FTP, etc.
 		/// </summary>
-		public ParamReportNotify notify;
+		public Dictionary<string, Uri> urls;
+		/// <summary>
+		/// Date information
+		/// Use the object key like a name of the date.
+		/// Example keys: Birthday, Started Date, Retired On, etc.
+		/// </summary>
+		public Dictionary<string, DateTime?> dates;
+		/// <summary>
+		/// Uncategorized information
+		/// Use the object keys and values however you'd like.
+		/// </summary>
+		public Dictionary<string, string> options;
+		/// <summary>
+		/// A list of roles they play in the <see cref="Company"/>.
+		/// </summary>
+		public List<string> roles;
+		/// <summary>
+		/// <see cref="Picture"/>s of this <see cref="ReportSchedule"/>.
+		/// </summary>
+		public List<ulong> pictures;
 	}
 }

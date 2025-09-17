@@ -15,26 +15,18 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The kind of <see cref="PermissionType"/>.
 		/// </summary>
-		/// <override required="always" />
 		public PermissionType kind;
 		/// <summary>
 		/// The level of access being defined.
 		/// </summary>
-		/// <override value="read"/>
 		public PermissionLevel? level;
 		/// <summary>
 		/// The way the access is used.
 		/// </summary>
-		/// <override value="grant"/>
 		public PermissionMethod? method;
 		/// <summary>
 		/// Codified names of <see cref="CompanyLabels.labels"/>.  If list is empty, this permission applies for all labels.
 		/// </summary>
-		/// <override>
-		/// <values format="codified">
-		/// <seealso cref="LabelStyle.code" />
-		/// </values>
-		/// </override>
 		public string[] labels;
 	}
 }

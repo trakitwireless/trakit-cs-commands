@@ -31,7 +31,6 @@ namespace Trakit.Commands {
 		/// <remarks>
 		/// See the <external href="https://apis.trakit.ca/bs/article/getting-started">Behaviours reference</external> for help in writing and debugging scripts.
 		/// </remarks>
-		/// <override required="create" />
 		public string source;
 		/// <summary>
 		/// When set to true, this <see cref="Company"/> as well as all child companies will be able to implement this <see cref="BehaviourScript"/> for that companies assets.

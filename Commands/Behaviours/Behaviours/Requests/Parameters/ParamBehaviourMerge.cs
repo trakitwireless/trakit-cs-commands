@@ -21,12 +21,10 @@ namespace Trakit.Commands {
 		/// Identifier of the <see cref="BehaviourScript"/> to which this <see cref="Behaviour"/> belongs.
 		/// After creation, this value is read-only.
 		/// </summary>
-		/// <override required="create" />
 		public ulong? script;
 		/// <summary>
 		/// Name for the <see cref="Behaviour"/>.
 		/// </summary>
-		/// <override required="create" max-length="100" />
 		public string name;
 		/// <summary>
 		/// Notes for the <see cref="Behaviour"/>.

@@ -26,74 +26,53 @@ namespace Trakit.Commands {
 		/// </summary>
 		public string notes;
 		/// <summary>
-		/// Which <see cref="Asset"/>s are targetted by this <see cref="MaintenanceSchedule"/>.
+		/// A collection of other names this person might go by.
+		/// Use the object key like a name identifier.
+		/// Example keys: Initials, Nickname, Maiden Name, etc.
 		/// </summary>
-		public string targets;
+		public Dictionary<string, string> otherNames;
 		/// <summary>
-		/// List of Users to send notifications.
+		/// Email addresses
+		/// Use the object key like a name of the address.
+		/// Example keys: Home, Work, Support, Old, etc.
 		/// </summary>
-		/// <see cref="User.login" />
-		/// <override>
-		/// <values format="email" />
-		/// </override>
-		public List<string> notify;
-
+		public Dictionary<string, string> emails;
 		/// <summary>
-		/// The fill/background colour of the icon.  Should be a hex colour in the format #RRGGBB.
+		/// Phone numbers.
+		/// Use the object key like a name of the phone number.
+		/// Example keys: Mobile, Fax, Home, Office, etc.
 		/// </summary>
-		/// <override max-length="22" />
-		public string fill;
+		public Dictionary<string, ulong?> phones;
 		/// <summary>
-		/// Outline and graphic colour.  Should be a hex colour in the format #RRGGBB.
+		/// Mailing addresses
+		/// Use the object key like a name of the address.
+		/// Example keys: Home, Work, Park, etc.
 		/// </summary>
-		/// <override max-length="22" />
-		public string stroke;
+		public Dictionary<string, string> addresses;
 		/// <summary>
-		/// The name of the symbol for this report.
+		/// Websites and other online resources
+		/// Use the object key like a name of the address.
+		/// Example keys: Downloads, Support, FTP, etc.
 		/// </summary>
-		/// <override max-length="22" format="codified" />
-		public string graphic;
-
+		public Dictionary<string, Uri> urls;
 		/// <summary>
-		/// The number of days in advance to predict a <see cref="MaintenanceJob"/> will become pending.
+		/// Date information
+		/// Use the object key like a name of the date.
+		/// Example keys: Birthday, Started Date, Retired On, etc.
 		/// </summary>
-		/// <override min-value="5" max-value="180" />
-		public uint? predictionDays;
+		public Dictionary<string, DateTime?> dates;
 		/// <summary>
-		/// The number of days between service visits.
+		/// Uncategorized information
+		/// Use the object keys and values however you'd like.
 		/// </summary>
-		public uint? recurDays;
+		public Dictionary<string, string> options;
 		/// <summary>
-		/// The amount of mileage between service visits.
+		/// A list of roles they play in the <see cref="Company"/>.
 		/// </summary>
-		public double? recurDistance;
+		public List<string> roles;
 		/// <summary>
-		/// The number of operating hours between service visits.
+		/// <see cref="Picture"/>s of this <see cref="MaintenanceSchedule"/>.
 		/// </summary>
-		public double? recurEngineHours;
-		/// <summary>
-		/// The per-<see cref="Asset"/> details calculated by the system to help predict the creation of <see cref="MaintenanceJob"/>s.
-		/// </summary>
-		public Dictionary<ulong, MaintenanceRecurrence> intervals;
-
-		// ------------ repair details ------------
-		/// <summary>
-		/// The name of the garage or service facility where the work is done.
-		/// </summary>
-		/// <override max-length="100" />
-		public string garage;
-		/// <summary>
-		/// The estimated time for the created <see cref="MaintenanceJob"/>.
-		/// </summary>
-		public TimeSpan? duration;
-		/// <summary>
-		/// The estimated cost for the created <see cref="MaintenanceJob"/> cost in dollars.
-		/// </summary>
-		public double? cost;
-		/// <summary>
-		/// A reference code used to track this created <see cref="MaintenanceJob"/>.
-		/// </summary>
-		/// <override max-length="100" />
-		public string reference;
+		public List<ulong> pictures;
 	}
 }

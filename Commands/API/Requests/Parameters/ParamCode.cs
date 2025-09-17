@@ -6,7 +6,6 @@
 		/// <summary>
 		/// A "code" identifying a resource.
 		/// </summary>
-		/// <override required="always" />
 		public string code;
 	}
 }

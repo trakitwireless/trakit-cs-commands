@@ -19,17 +19,17 @@ namespace Trakit.Tools {
 				switch (kind) {
 					case AssetType.person:
 						asset = new Person() {
-							general = obj.ToObject<PersonGeneral>(serializer),
+							General = obj.ToObject<PersonGeneral>(serializer),
 						};
 						break;
 					case AssetType.vehicle:
 						asset = new Vehicle() {
-							general = obj.ToObject<VehicleGeneral>(serializer),
+							General = obj.ToObject<VehicleGeneral>(serializer),
 						};
 						break;
 					case AssetType.trailer:
 						asset = new Trailer() {
-							general = obj.ToObject<TrailerGeneral>(serializer),
+							General = obj.ToObject<TrailerGeneral>(serializer),
 						};
 						break;
 					case AssetType.asset:
@@ -43,21 +43,21 @@ namespace Trakit.Tools {
 				switch (kind) {
 					case AssetType.person:
 						asset = new Person() {
-							general = obj.ToObject<PersonGeneral>(serializer),
+							General = obj.ToObject<PersonGeneral>(serializer),
 							Advanced = obj.ToObject<AssetAdvanced>(serializer),
 							Dispatch = obj["dispatch"].ToObject<AssetDispatch>(serializer),
 						};
 						break;
 					case AssetType.vehicle:
 						asset = new Vehicle() {
-							general = obj.ToObject<VehicleGeneral>(serializer),
-							advanced = obj.ToObject<VehicleAdvanced>(serializer),
+							General = obj.ToObject<VehicleGeneral>(serializer),
+							Advanced = obj.ToObject<VehicleAdvanced>(serializer),
 							Dispatch = obj["dispatch"].ToObject<AssetDispatch>(serializer),
 						};
 						break;
 					case AssetType.trailer:
 						asset = new Trailer() {
-							general = obj.ToObject<TrailerGeneral>(serializer),
+							General = obj.ToObject<TrailerGeneral>(serializer),
 							Advanced = obj.ToObject<AssetAdvanced>(serializer),
 							Dispatch = obj["dispatch"].ToObject<AssetDispatch>(serializer),
 						};

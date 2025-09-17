@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using Trakit.Objects;
 
 namespace Trakit.Commands {
@@ -27,83 +26,53 @@ namespace Trakit.Commands {
 		/// </summary>
 		public string notes;
 		/// <summary>
-		/// The kind of shape being created.
+		/// A collection of other names this person might go by.
+		/// Use the object key like a name identifier.
+		/// Example keys: Initials, Nickname, Maiden Name, etc.
 		/// </summary>
-		/// <override required="create" />
-		public PlaceType? kind;
+		public Dictionary<string, string> otherNames;
 		/// <summary>
-		/// Full street address including province/state, country, and postal/zip code.
+		/// Email addresses
+		/// Use the object key like a name of the address.
+		/// Example keys: Home, Work, Support, Old, etc.
 		/// </summary>
-		public string address;
+		public Dictionary<string, string> emails;
 		/// <summary>
-		/// The <see cref="Icon"/> used to display this POI in lists and on the map.
+		/// Phone numbers.
+		/// Use the object key like a name of the phone number.
+		/// Example keys: Mobile, Fax, Home, Office, etc.
 		/// </summary>
-		/// <override required="create" />
-		/// <seealso cref="Icon.id" />
-		public ulong? icon;
+		public Dictionary<string, ulong?> phones;
 		/// <summary>
-		/// The codified names of labels
+		/// Mailing addresses
+		/// Use the object key like a name of the address.
+		/// Example keys: Home, Work, Park, etc.
 		/// </summary>
-		/// <override>
-		/// <values format="codified">
-		/// <seealso cref="LabelStyle.code" />
-		/// </values>
-		/// </override>
-		public List<string> labels;
+		public Dictionary<string, string> addresses;
 		/// <summary>
-		/// The fill colour given to this <see cref="Place"/> for easy visual identification on the map.
+		/// Websites and other online resources
+		/// Use the object key like a name of the address.
+		/// Example keys: Downloads, Support, FTP, etc.
 		/// </summary>
-		/// <override max-length="22" format="colour" />
-		public string colour;
+		public Dictionary<string, Uri> urls;
 		/// <summary>
-		/// Central lat/long coordinates.
-		/// When not present, the shape centre is used for routing.
+		/// Date information
+		/// Use the object key like a name of the date.
+		/// Example keys: Birthday, Started Date, Retired On, etc.
 		/// </summary>
-		public LatLng anchor;
+		public Dictionary<string, DateTime?> dates;
 		/// <summary>
-		/// Boundary threshold (in meters)
+		/// Uncategorized information
+		/// Use the object keys and values however you'd like.
 		/// </summary>
-		/// <override required="create (radial)" />
-		public double? radius;
+		public Dictionary<string, string> options;
 		/// <summary>
-		/// For a <see cref="ShapeType.rectangle"/>, the input contains the north east and south west corner coordinates.
-		/// For a <see cref="ShapeType.polygon"/>, the input lists all coordinates (oriented as counter-clockwise) needed to draw the geofence.
+		/// A list of roles they play in the <see cref="Company"/>.
 		/// </summary>
-		/// <override required="create (rectangle or polygon)" />
-		public List<LatLng> shape;
+		public List<string> roles;
 		/// <summary>
-		/// The identifiers of <see cref="Picture"/>s of this <see cref="Place"/>.
+		/// <see cref="Picture"/>s of this <see cref="Place"/>.
 		/// </summary>
-		/// <override>
-		/// <values>
-		/// <seealso cref="Picture.id" />
-		/// </values>
-		/// </override>
 		public List<ulong> pictures;
-		/// <summary>
-		/// A custom field used to refer to an external system.
-		/// </summary>
-		/// <override max-length="100" />
-		public string reference;
-
-		/// <summary>
-		/// True when a <see cref="ShapeType.polygon"/> or <see cref="ShapeType.rectangle"/> shape has enough coordinates given.
-		/// </summary>
-		public bool validPoints() {
-			return this.kind == PlaceType.polygon
-				? this.shape?.Count >= 3
-				: this.kind == PlaceType.rectangle
-					? this.shape?.Count == 2
-					: this.anchor?.isValid() ?? false;
-		}
-		/// <summary>
-		/// True when a <see cref="ShapeType.radial"/> radius is within the allowed size range.
-		/// </summary>
-		public bool validRadius() {
-			return this.kind == PlaceType.radial
-				&& this.radius.HasValue
-				&& this.radius.Value != double.NaN
-				&& !double.IsInfinity(this.radius.Value);
-		}
 	}
 }
