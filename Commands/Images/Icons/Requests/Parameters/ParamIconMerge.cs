@@ -26,53 +26,29 @@ namespace Trakit.Commands {
 		/// </summary>
 		public string notes;
 		/// <summary>
-		/// A collection of other names this person might go by.
-		/// Use the object key like a name identifier.
-		/// Example keys: Initials, Nickname, Maiden Name, etc.
+		/// A noun to describe the type of thing represented.  Like Truck, Car, Trailer, Hot-Air Balloon, etc...
 		/// </summary>
-		public Dictionary<string, string> otherNames;
+		/// <override max-length="100" />
+		public string category;
 		/// <summary>
-		/// Email addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Support, Old, etc.
+		/// Indicates whether this <see cref="Icon"/> is available to child companies.
 		/// </summary>
-		public Dictionary<string, string> emails;
+		public bool? global;
 		/// <summary>
-		/// Phone numbers.
-		/// Use the object key like a name of the phone number.
-		/// Example keys: Mobile, Fax, Home, Office, etc.
+		/// A list of things that this <see cref="Icon"/> can be used to represent.  Like <c>asset</c>, <c>place</c>, <c>user</c>, etc...
 		/// </summary>
-		public Dictionary<string, ulong?> phones;
+		public List<string> usage;
 		/// <summary>
-		/// Mailing addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Park, etc.
+		/// Definition for the name bubble above the <see cref="Icon"/> on a map.
 		/// </summary>
-		public Dictionary<string, string> addresses;
+		public IconLabel label;
 		/// <summary>
-		/// Websites and other online resources
-		/// Use the object key like a name of the address.
-		/// Example keys: Downloads, Support, FTP, etc.
+		/// Definition for the name badge beside the <see cref="Icon"/> on a map.
 		/// </summary>
-		public Dictionary<string, Uri> urls;
+		public IconLabel badge;
 		/// <summary>
-		/// Date information
-		/// Use the object key like a name of the date.
-		/// Example keys: Birthday, Started Date, Retired On, etc.
+		/// The images used to show the detail of this <see cref="Icon"/>.
 		/// </summary>
-		public Dictionary<string, DateTime?> dates;
-		/// <summary>
-		/// Uncategorized information
-		/// Use the object keys and values however you'd like.
-		/// </summary>
-		public Dictionary<string, string> options;
-		/// <summary>
-		/// A list of roles they play in the <see cref="Company"/>.
-		/// </summary>
-		public List<string> roles;
-		/// <summary>
-		/// <see cref="Picture"/>s of this <see cref="Icon"/>.
-		/// </summary>
-		public List<ulong> pictures;
+		public List<IconGlyph> glyphs;
 	}
 }

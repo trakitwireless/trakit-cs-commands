@@ -19,61 +19,34 @@ namespace Trakit.Commands {
 		/// </summary>
 		public ulong? company;
 		/// <summary>
+		/// The <see cref="ProviderConfigurationType"/> that the <see cref="ProviderConfiguration"/> implements.
+		/// After creation, this value is read-only.
+		/// </summary>
+		/// <override required="create" />
+		public ulong? type;
+		/// <summary>
 		/// Name for the <see cref="ProviderConfiguration"/>.
 		/// </summary>
+		/// <override required="create" max-length="100" />
 		public string name;
 		/// <summary>
 		/// Notes for the <see cref="ProviderConfiguration"/>.
 		/// </summary>
 		public string notes;
 		/// <summary>
-		/// A collection of other names this person might go by.
-		/// Use the object key like a name identifier.
-		/// Example keys: Initials, Nickname, Maiden Name, etc.
+		/// The values needed to implement the <see cref="ProviderConfigurationType"/>.
+		/// Each key in this object is the identifier of a required <see cref="ProviderConfigurationNode"/>.
+		/// This command does not support patch semantics; all keys must be sent if any are sent.
 		/// </summary>
-		public Dictionary<string, string> otherNames;
+		public Dictionary<string, object> scriptParameters;
 		/// <summary>
-		/// Email addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Support, Old, etc.
+		/// A list of <see cref="Place"/>s whose shape is programmed directly onto <see cref="Provider"/>s to raise instant boundary events.
 		/// </summary>
-		public Dictionary<string, string> emails;
-		/// <summary>
-		/// Phone numbers.
-		/// Use the object key like a name of the phone number.
-		/// Example keys: Mobile, Fax, Home, Office, etc.
-		/// </summary>
-		public Dictionary<string, ulong?> phones;
-		/// <summary>
-		/// Mailing addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Park, etc.
-		/// </summary>
-		public Dictionary<string, string> addresses;
-		/// <summary>
-		/// Websites and other online resources
-		/// Use the object key like a name of the address.
-		/// Example keys: Downloads, Support, FTP, etc.
-		/// </summary>
-		public Dictionary<string, Uri> urls;
-		/// <summary>
-		/// Date information
-		/// Use the object key like a name of the date.
-		/// Example keys: Birthday, Started Date, Retired On, etc.
-		/// </summary>
-		public Dictionary<string, DateTime?> dates;
-		/// <summary>
-		/// Uncategorized information
-		/// Use the object keys and values however you'd like.
-		/// </summary>
-		public Dictionary<string, string> options;
-		/// <summary>
-		/// A list of roles they play in the <see cref="Company"/>.
-		/// </summary>
-		public List<string> roles;
-		/// <summary>
-		/// <see cref="Picture"/>s of this <see cref="ProviderConfiguration"/>.
-		/// </summary>
-		public List<ulong> pictures;
+		/// <override>
+		/// <values>
+		/// <seealso cref="Place.id" />
+		/// </values>
+		/// </override>
+		public List<ulong> geofences;
 	}
 }

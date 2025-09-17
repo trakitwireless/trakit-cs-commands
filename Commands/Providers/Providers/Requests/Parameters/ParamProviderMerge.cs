@@ -8,71 +8,41 @@ namespace Trakit.Commands {
 	/// </summary>
 	public class ParamProviderMerge : ParamMergeSubscribable {
 		/// <summary>
-		/// The unique identifier of the <see cref="Provider"/> you want to update.
-		/// Leave this as <c>null</c> when creating a new <see cref="Provider"/>.
+		/// Unique identifier of the <see cref="Provider"/>.
 		/// </summary>
-		public ulong? id;
+		/// <override min-length="10" max-length="50" required="always" />
+		public string id;
 		/// <summary>
-		/// The <see cref="Company"/> to which this <see cref="Provider"/> belongs.
-		/// After creation, this value is read-only.
+		/// A name for the <see cref="Provider"/>.
 		/// </summary>
-		public ulong? company;
-		/// <summary>
-		/// Name for the <see cref="Provider"/>.
-		/// </summary>
+		/// <override required="create" max-length="100" />
 		public string name;
 		/// <summary>
-		/// Notes for the <see cref="Provider"/>.
+		/// Notes for this <see cref="Provider"/>.
 		/// </summary>
 		public string notes;
 		/// <summary>
-		/// A collection of other names this person might go by.
-		/// Use the object key like a name identifier.
-		/// Example keys: Initials, Nickname, Maiden Name, etc.
+		/// The type of <see cref="Provider"/>.
 		/// </summary>
-		public Dictionary<string, string> otherNames;
+		/// <override required="create" />
+		public ProviderType? kind;
 		/// <summary>
-		/// Email addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Support, Old, etc.
+		/// A reference to the <see cref="Asset"/> with which to provide events.
 		/// </summary>
-		public Dictionary<string, string> emails;
+		public ulong? asset;
 		/// <summary>
-		/// Phone numbers.
-		/// Use the object key like a name of the phone number.
-		/// Example keys: Mobile, Fax, Home, Office, etc.
+		/// Identifier of the <see cref="ProviderConfig"/>/<see cref="ProviderConfiguration"/> this <see cref="Provider"/> will use.
 		/// </summary>
-		public Dictionary<string, ulong?> phones;
+		/// <override required="create" />
+		public ulong? config;
 		/// <summary>
-		/// Mailing addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Park, etc.
+		/// The phone number this <see cref="Provider"/> uses (if known).
 		/// </summary>
-		public Dictionary<string, string> addresses;
+		/// <override format="phone" />
+		public ulong? phone;
 		/// <summary>
-		/// Websites and other online resources
-		/// Use the object key like a name of the address.
-		/// Example keys: Downloads, Support, FTP, etc.
+		/// The password required to communicate and program this <see cref="Provider"/>.
 		/// </summary>
-		public Dictionary<string, Uri> urls;
-		/// <summary>
-		/// Date information
-		/// Use the object key like a name of the date.
-		/// Example keys: Birthday, Started Date, Retired On, etc.
-		/// </summary>
-		public Dictionary<string, DateTime?> dates;
-		/// <summary>
-		/// Uncategorized information
-		/// Use the object keys and values however you'd like.
-		/// </summary>
-		public Dictionary<string, string> options;
-		/// <summary>
-		/// A list of roles they play in the <see cref="Company"/>.
-		/// </summary>
-		public List<string> roles;
-		/// <summary>
-		/// <see cref="Picture"/>s of this <see cref="Provider"/>.
-		/// </summary>
-		public List<ulong> pictures;
+		public string password;
 	}
 }

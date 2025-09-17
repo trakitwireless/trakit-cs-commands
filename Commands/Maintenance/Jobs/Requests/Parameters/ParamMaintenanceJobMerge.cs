@@ -13,66 +13,78 @@ namespace Trakit.Commands {
 		/// </summary>
 		public ulong? id;
 		/// <summary>
-		/// The <see cref="Company"/> to which this <see cref="MaintenanceJob"/> belongs.
-		/// After creation, this value is read-only.
+		/// The identifier of the <see cref="Asset"/> to which this <see cref="MaintenanceJob"/> is assigned.
 		/// </summary>
-		public ulong? company;
+		/// <override required="create" />
+		public ulong? asset;
 		/// <summary>
-		/// Name for the <see cref="MaintenanceJob"/>.
+		/// The <see cref="MaintenanceSchedule"/> from which this job was created
 		/// </summary>
+		/// <seealso cref="MaintenanceSchedule.id" />
+		public ulong? schedule;
+		/// <summary>
+		/// The work being done. Like "oil change".
+		/// </summary>
+		/// <override required="create" max-length="100" />
 		public string name;
 		/// <summary>
-		/// Notes for the <see cref="MaintenanceJob"/>.
+		/// Notes about the <see cref="MaintenanceJob"/>.  Like "changed the oil and filter".
 		/// </summary>
 		public string notes;
 		/// <summary>
-		/// A collection of other names this person might go by.
-		/// Use the object key like a name identifier.
-		/// Example keys: Initials, Nickname, Maiden Name, etc.
+		/// The status of this <see cref="MaintenanceJob"/>.
 		/// </summary>
-		public Dictionary<string, string> otherNames;
+		public MaintenanceJobStatus? status;
 		/// <summary>
-		/// Email addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Support, Old, etc.
+		/// When was this <see cref="MaintenanceJob"/> created.
 		/// </summary>
-		public Dictionary<string, string> emails;
+		/// <override value="current time" />
+		public DateTime? created;
 		/// <summary>
-		/// Phone numbers.
-		/// Use the object key like a name of the phone number.
-		/// Example keys: Mobile, Fax, Home, Office, etc.
+		/// When was this <see cref="MaintenanceJob"/> created.
 		/// </summary>
-		public Dictionary<string, ulong?> phones;
+		public DateTime? completed;
 		/// <summary>
-		/// Mailing addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Park, etc.
+		/// The odometer at the time of the service.
 		/// </summary>
-		public Dictionary<string, string> addresses;
+		public double? odometer;
 		/// <summary>
-		/// Websites and other online resources
-		/// Use the object key like a name of the address.
-		/// Example keys: Downloads, Support, FTP, etc.
+		/// The operating time at the time of the service.
 		/// </summary>
-		public Dictionary<string, Uri> urls;
+		public double? engineHours;
+
+		// ------------ repair details ------------
 		/// <summary>
-		/// Date information
-		/// Use the object key like a name of the date.
-		/// Example keys: Birthday, Started Date, Retired On, etc.
+		/// The name of the garage or service facility where the work is done.
 		/// </summary>
-		public Dictionary<string, DateTime?> dates;
+		/// <override max-length="100" />
+		public string garage;
 		/// <summary>
-		/// Uncategorized information
-		/// Use the object keys and values however you'd like.
+		/// Time it took to complete the <see cref="MaintenanceJob"/>.
 		/// </summary>
-		public Dictionary<string, string> options;
+		public TimeSpan? duration;
 		/// <summary>
-		/// A list of roles they play in the <see cref="Company"/>.
+		/// How much the <see cref="MaintenanceJob"/> cost in dollars.
 		/// </summary>
-		public List<string> roles;
+		public double? cost;
 		/// <summary>
-		/// <see cref="Picture"/>s of this <see cref="MaintenanceJob"/>.
+		/// A reference code used to track this <see cref="MaintenanceJob"/>.
 		/// </summary>
+		/// <override max-length="100" />
+		public string reference;
+		/// <summary>
+		/// The mechanic who performed the work.
+		/// </summary>
+		/// <override max-length="100" />
+		public string technician;
+		/// <summary>
+		/// <see cref="Picture"/>s taken while performing the work for reference.
+		/// </summary>
+		/// <override>
+		/// <values>
+		/// <seealso cref="Picture.id" />
+		/// </values>
+		/// </override>
 		public List<ulong> pictures;
 	}
 }

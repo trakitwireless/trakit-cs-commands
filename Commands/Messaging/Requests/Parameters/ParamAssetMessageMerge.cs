@@ -13,66 +13,43 @@ namespace Trakit.Commands {
 		/// </summary>
 		public ulong? id;
 		/// <summary>
-		/// The <see cref="Company"/> to which this <see cref="AssetMessage"/> belongs.
+		/// The <see cref="Asset"/> that this <see cref="Message"/> was sent from or to.
 		/// After creation, this value is read-only.
 		/// </summary>
-		public ulong? company;
+		/// <override required="create" />
+		public ulong? asset;
 		/// <summary>
-		/// Name for the <see cref="AssetMessage"/>.
+		/// The kind of protocol used for this <see cref="Message"/>.
+		/// After creation, this value is read-only.
 		/// </summary>
-		public string name;
+		/// <override required="create" />
+		public MessageType? kind;
 		/// <summary>
-		/// Notes for the <see cref="AssetMessage"/>.
+		/// The folder where this <see cref="Message"/> is stored.
 		/// </summary>
-		public string notes;
+		public MessageFolder? folder;
 		/// <summary>
-		/// A collection of other names this person might go by.
-		/// Use the object key like a name identifier.
-		/// Example keys: Initials, Nickname, Maiden Name, etc.
+		/// Optional to address used when creating the <see cref="Message"/> if no messaging address is available.
+		/// After creation, this value is read-only.
 		/// </summary>
-		public Dictionary<string, string> otherNames;
+		/// <override required="create" />
+		public string to;
 		/// <summary>
-		/// Email addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Support, Old, etc.
+		/// The <see cref="Message"/> subject field.
+		/// After creation, this value is read-only.
+		/// This is used exclusively with <see cref="MemoType.email"/> type <see cref="Message"/>s.
 		/// </summary>
-		public Dictionary<string, string> emails;
+		public string subject;
 		/// <summary>
-		/// Phone numbers.
-		/// Use the object key like a name of the phone number.
-		/// Example keys: Mobile, Fax, Home, Office, etc.
+		/// The body of the <see cref="Message"/>.
+		/// After creation, this value is read-only.
 		/// </summary>
-		public Dictionary<string, ulong?> phones;
+		/// <override required="create" />
+		public string body;
 		/// <summary>
-		/// Mailing addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Park, etc.
+		/// Set to true to log that the <see cref="Message"/> was received and read by yourself.
+		/// Once set, the <see cref="Message.readBy"/> value will be your login, and cannot be set by anyone else.
 		/// </summary>
-		public Dictionary<string, string> addresses;
-		/// <summary>
-		/// Websites and other online resources
-		/// Use the object key like a name of the address.
-		/// Example keys: Downloads, Support, FTP, etc.
-		/// </summary>
-		public Dictionary<string, Uri> urls;
-		/// <summary>
-		/// Date information
-		/// Use the object key like a name of the date.
-		/// Example keys: Birthday, Started Date, Retired On, etc.
-		/// </summary>
-		public Dictionary<string, DateTime?> dates;
-		/// <summary>
-		/// Uncategorized information
-		/// Use the object keys and values however you'd like.
-		/// </summary>
-		public Dictionary<string, string> options;
-		/// <summary>
-		/// A list of roles they play in the <see cref="Company"/>.
-		/// </summary>
-		public List<string> roles;
-		/// <summary>
-		/// <see cref="Picture"/>s of this <see cref="AssetMessage"/>.
-		/// </summary>
-		public List<ulong> pictures;
+		public bool? read;
 	}
 }

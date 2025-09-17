@@ -29,11 +29,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Codified label names used to relate forms to <see cref="Asset"/>s.
 		/// </summary>
-		/// <override>
-		/// <values format="codified">
-		/// <seealso cref="LabelStyle.code" />
-		/// </values>
-		/// </override>
 		public List<string> labels;
 		/// <summary>
 		/// A collection of all the <see cref="FormTemplate.fields"/>.

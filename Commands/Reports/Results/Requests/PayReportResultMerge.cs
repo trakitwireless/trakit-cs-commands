@@ -8,7 +8,7 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Parameters given to create or update a <see cref="ReportResult"/>.
 		/// </summary>
-		public ParamReportResultMerge reportResult { get; set; }
+		public ParamReportOptions reportResult { get; set; }
 
 		/// <summary>
 		/// 

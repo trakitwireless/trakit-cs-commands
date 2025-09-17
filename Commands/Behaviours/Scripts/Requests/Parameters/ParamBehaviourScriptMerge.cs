@@ -26,53 +26,37 @@ namespace Trakit.Commands {
 		/// </summary>
 		public string notes;
 		/// <summary>
-		/// A collection of other names this person might go by.
-		/// Use the object key like a name identifier.
-		/// Example keys: Initials, Nickname, Maiden Name, etc.
+		/// Source code of the <see cref="BehaviourScript"/>.
 		/// </summary>
-		public Dictionary<string, string> otherNames;
+		/// <remarks>
+		/// See the <external href="https://apis.trakit.ca/bs/article/getting-started">Behaviours reference</external> for help in writing and debugging scripts.
+		/// </remarks>
+		/// <override required="create" />
+		public string source;
 		/// <summary>
-		/// Email addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Support, Old, etc.
+		/// When set to true, this <see cref="Company"/> as well as all child companies will be able to implement this <see cref="BehaviourScript"/> for that companies assets.
 		/// </summary>
-		public Dictionary<string, string> emails;
+		public bool? global;
 		/// <summary>
-		/// Phone numbers.
-		/// Use the object key like a name of the phone number.
-		/// Example keys: Mobile, Fax, Home, Office, etc.
+		/// A search pattern used to select the providers.
 		/// </summary>
-		public Dictionary<string, ulong?> phones;
+		public string filters;
 		/// <summary>
-		/// Mailing addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Park, etc.
+		/// The defined arguments for this <see cref="BehaviourScript"/>.
+		/// Each key in the object is the name of an argument.
 		/// </summary>
-		public Dictionary<string, string> addresses;
+		public Dictionary<string, BehaviourParameter> parameters;
 		/// <summary>
-		/// Websites and other online resources
-		/// Use the object key like a name of the address.
-		/// Example keys: Downloads, Support, FTP, etc.
+		/// Background and fill colour in the UI.
 		/// </summary>
-		public Dictionary<string, Uri> urls;
+		public string fill;
 		/// <summary>
-		/// Date information
-		/// Use the object key like a name of the date.
-		/// Example keys: Birthday, Started Date, Retired On, etc.
+		/// Text and outline colour in the UI.
 		/// </summary>
-		public Dictionary<string, DateTime?> dates;
+		public string stroke;
 		/// <summary>
-		/// Uncategorized information
-		/// Use the object keys and values however you'd like.
+		/// The name of the symbol shown in the UI.
 		/// </summary>
-		public Dictionary<string, string> options;
-		/// <summary>
-		/// A list of roles they play in the <see cref="Company"/>.
-		/// </summary>
-		public List<string> roles;
-		/// <summary>
-		/// <see cref="Picture"/>s of this <see cref="BehaviourScript"/>.
-		/// </summary>
-		public List<ulong> pictures;
+		public string graphic;
 	}
 }
