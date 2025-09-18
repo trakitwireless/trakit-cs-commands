@@ -42,11 +42,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The codified names of labels
 		/// </summary>
-		/// <override>
-		/// <values format="codified">
-		/// <seealso cref="LabelStyle.code" />
-		/// </values>
-		/// </override>
 		public List<string> labels;
 		/// <summary>
 		/// The fill colour given to this <see cref="Place"/> for easy visual identification on the map.
@@ -69,11 +64,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The identifiers of <see cref="Picture"/>s of this <see cref="Place"/>.
 		/// </summary>
-		/// <override>
-		/// <values>
-		/// <seealso cref="Picture.id" />
-		/// </values>
-		/// </override>
 		public List<ulong> pictures;
 		/// <summary>
 		/// A custom field used to refer to an external system.

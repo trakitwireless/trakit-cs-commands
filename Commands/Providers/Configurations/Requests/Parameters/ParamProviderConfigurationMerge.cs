@@ -40,11 +40,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// A list of <see cref="Place"/>s whose shape is programmed directly onto <see cref="Provider"/>s to raise instant boundary events.
 		/// </summary>
-		/// <override>
-		/// <values>
-		/// <seealso cref="Place.id" />
-		/// </values>
-		/// </override>
 		public List<ulong> geofences;
 	}
 }

@@ -34,9 +34,6 @@ namespace Trakit.Commands {
 		/// List of Users to send notifications.
 		/// </summary>
 		/// <see cref="User.login" />
-		/// <override>
-		/// <values format="email" />
-		/// </override>
 		public List<string> notify;
 
 		/// <summary>
