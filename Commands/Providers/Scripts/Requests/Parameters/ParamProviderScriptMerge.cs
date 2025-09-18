@@ -26,53 +26,37 @@ namespace Trakit.Commands {
 		/// </summary>
 		public string notes;
 		/// <summary>
-		/// A collection of other names this person might go by.
-		/// Use the object key like a name identifier.
-		/// Example keys: Initials, Nickname, Maiden Name, etc.
+		/// Indicates whether this <see cref="ProviderScript"/> is available to child companies.
 		/// </summary>
-		public Dictionary<string, string> otherNames;
+		public bool? global;
 		/// <summary>
-		/// Email addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Support, Old, etc.
+		/// The type of provider for which this <see cref="ProviderScript"/> can be used.
+		/// Limiting to a specific model from a manufacturer is accomplished through the block conditions.
 		/// </summary>
-		public Dictionary<string, string> emails;
+		/// <override required="create" />
+		public ProviderType? kind;
 		/// <summary>
-		/// Phone numbers.
-		/// Use the object key like a name of the phone number.
-		/// Example keys: Mobile, Fax, Home, Office, etc.
+		/// Background and fill colour in the UI.
 		/// </summary>
-		public Dictionary<string, ulong?> phones;
+		public string fill;
 		/// <summary>
-		/// Mailing addresses
-		/// Use the object key like a name of the address.
-		/// Example keys: Home, Work, Park, etc.
+		/// Text and outline colour in the UI.
 		/// </summary>
-		public Dictionary<string, string> addresses;
+		public string stroke;
 		/// <summary>
-		/// Websites and other online resources
-		/// Use the object key like a name of the address.
-		/// Example keys: Downloads, Support, FTP, etc.
+		/// The name of the symbol shown in the UI.
 		/// </summary>
-		public Dictionary<string, Uri> urls;
+		public string graphic;
 		/// <summary>
-		/// Date information
-		/// Use the object key like a name of the date.
-		/// Example keys: Birthday, Started Date, Retired On, etc.
+		/// Blocks of file data which are (optionally) included in the <see cref="ProviderScript"/> data file.
 		/// </summary>
-		public Dictionary<string, DateTime?> dates;
+		/// <override required="create">
+		/// <values min-count="1" />
+		/// </override>
+		public List<ProviderScriptBlock> blocks;
 		/// <summary>
-		/// Uncategorized information
-		/// Use the object keys and values however you'd like.
+		/// Parameter definitions for this <see cref="ProviderScript"/>, including type-hints and default values.
 		/// </summary>
-		public Dictionary<string, string> options;
-		/// <summary>
-		/// A list of roles they play in the <see cref="Company"/>.
-		/// </summary>
-		public List<string> roles;
-		/// <summary>
-		/// <see cref="Picture"/>s of this <see cref="ProviderScript"/>.
-		/// </summary>
-		public List<ulong> pictures;
+		public Dictionary<string, ProviderScriptParameter> parameters;
 	}
 }
