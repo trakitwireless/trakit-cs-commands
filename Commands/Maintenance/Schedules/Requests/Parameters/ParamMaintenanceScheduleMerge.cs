@@ -29,7 +29,7 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Which <see cref="Asset"/>s are targetted by this <see cref="MaintenanceSchedule"/>.
 		/// </summary>
-		public SearchPattern[] targets;
+		public string targets;
 		/// <summary>
 		/// List of Users to send notifications.
 		/// </summary>
