@@ -78,7 +78,7 @@ namespace Trakit.Commands {
 				? this.shape?.Count >= 3
 				: this.kind == PlaceType.rectangle
 					? this.shape?.Count == 2
-					: this.anchor?.isValid() ?? false;
+					: this.anchor?.IsValid() ?? false;
 		}
 		/// <summary>
 		/// True when a <see cref="PlaceType.radial"/> radius is within the allowed size range.
