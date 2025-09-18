@@ -49,8 +49,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Blocks of file data which are (optionally) included in the <see cref="ProviderScript"/> data file.
 		/// </summary>
-		/// <values min-count="1" />
-		/// </override>
 		public List<ProviderScriptBlock> blocks;
 		/// <summary>
 		/// Parameter definitions for this <see cref="ProviderScript"/>, including type-hints and default values.
