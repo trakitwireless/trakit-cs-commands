@@ -29,7 +29,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Which <see cref="Asset"/>s are targetted by this <see cref="MaintenanceSchedule"/>.
 		/// </summary>
-		/// <override type="System.String" format="expression" />
 		public SearchPattern[] targets;
 		/// <summary>
 		/// List of Users to send notifications.
@@ -43,23 +42,19 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The fill/background colour of the icon.  Should be a hex colour in the format #RRGGBB.
 		/// </summary>
-		/// <override max-length="22" />
 		public string fill;
 		/// <summary>
 		/// Outline and graphic colour.  Should be a hex colour in the format #RRGGBB.
 		/// </summary>
-		/// <override max-length="22" />
 		public string stroke;
 		/// <summary>
 		/// The name of the symbol for this report.
 		/// </summary>
-		/// <override max-length="22" format="codified" />
 		public string graphic;
 
 		/// <summary>
 		/// The number of days in advance to predict a <see cref="MaintenanceJob"/> will become pending.
 		/// </summary>
-		/// <override min-value="5" max-value="180" />
 		public uint? predictionDays;
 		/// <summary>
 		/// The number of days between service visits.
@@ -82,7 +77,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The name of the garage or service facility where the work is done.
 		/// </summary>
-		/// <override max-length="100" />
 		public string garage;
 		/// <summary>
 		/// The estimated time for the created <see cref="MaintenanceJob"/>.
@@ -95,7 +89,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// A reference code used to track this created <see cref="MaintenanceJob"/>.
 		/// </summary>
-		/// <override max-length="100" />
 		public string reference;
 	}
 }

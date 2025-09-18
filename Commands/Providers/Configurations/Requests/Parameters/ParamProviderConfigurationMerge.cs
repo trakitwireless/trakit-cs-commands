@@ -22,12 +22,10 @@ namespace Trakit.Commands {
 		/// The <see cref="ProviderConfigurationType"/> that the <see cref="ProviderConfiguration"/> implements.
 		/// After creation, this value is read-only.
 		/// </summary>
-		/// <override required="create" />
 		public ulong? type;
 		/// <summary>
 		/// Name for the <see cref="ProviderConfiguration"/>.
 		/// </summary>
-		/// <override required="create" max-length="100" />
 		public string name;
 		/// <summary>
 		/// Notes for the <see cref="ProviderConfiguration"/>.

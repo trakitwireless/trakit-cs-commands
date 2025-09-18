@@ -16,17 +16,14 @@ namespace Trakit.Commands {
 		/// The <see cref="ProviderScript"/> to the <see cref="ProviderConfig"/> implements.
 		/// After creation, this value is read-only.
 		/// </summary>
-		/// <override required="create" />
 		public ulong? script;
 		/// <summary>
 		/// The <see cref="Company"/> to which the <see cref="ProviderConfig"/> belongs.
 		/// </summary>
-		/// <override required="create" />
 		public ulong? company;
 		/// <summary>
 		/// Name for the <see cref="ProviderConfig"/>.
 		/// </summary>
-		/// <override required="create" max-length="100" />
 		public string name;
 		/// <summary>
 		/// Notes for the <see cref="ProviderConfig"/>.
@@ -43,7 +40,6 @@ namespace Trakit.Commands {
 		/// Use "*" to match all the Places the Provider's Asset can match.
 		/// Or use "#123456" or "label:term" like other Place search patterns.
 		/// </summary>
-		/// <override type="System.String" format="expression" />
 		public string geofences;
 	}
 }

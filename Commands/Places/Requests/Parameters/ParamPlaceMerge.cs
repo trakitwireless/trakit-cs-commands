@@ -29,7 +29,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The kind of shape being created.
 		/// </summary>
-		/// <override required="create" />
 		public PlaceType? kind;
 		/// <summary>
 		/// Full street address including province/state, country, and postal/zip code.
@@ -38,7 +37,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The <see cref="Icon"/> used to display this POI in lists and on the map.
 		/// </summary>
-		/// <override required="create" />
 		/// <seealso cref="Icon.id" />
 		public ulong? icon;
 		/// <summary>
@@ -53,7 +51,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The fill colour given to this <see cref="Place"/> for easy visual identification on the map.
 		/// </summary>
-		/// <override max-length="22" format="colour" />
 		public string colour;
 		/// <summary>
 		/// Central lat/long coordinates.
@@ -63,13 +60,11 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Boundary threshold (in meters)
 		/// </summary>
-		/// <override required="create (radial)" />
 		public double? radius;
 		/// <summary>
 		/// For a <see cref="PlaceType.rectangle"/>, the input contains the north east and south west corner coordinates.
 		/// For a <see cref="PlaceType.polygon"/>, the input lists all coordinates (oriented as counter-clockwise) needed to draw the geofence.
 		/// </summary>
-		/// <override required="create (rectangle or polygon)" />
 		public List<LatLng> shape;
 		/// <summary>
 		/// The identifiers of <see cref="Picture"/>s of this <see cref="Place"/>.
@@ -83,7 +78,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// A custom field used to refer to an external system.
 		/// </summary>
-		/// <override max-length="100" />
 		public string reference;
 
 		/// <summary>

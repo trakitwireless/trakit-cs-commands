@@ -33,7 +33,6 @@ namespace Trakit.Commands {
 		/// The type of provider for which this <see cref="ProviderScript"/> can be used.
 		/// Limiting to a specific model from a manufacturer is accomplished through the block conditions.
 		/// </summary>
-		/// <override required="create" />
 		public ProviderType? kind;
 		/// <summary>
 		/// Background and fill colour in the UI.
@@ -50,7 +49,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Blocks of file data which are (optionally) included in the <see cref="ProviderScript"/> data file.
 		/// </summary>
-		/// <override required="create">
 		/// <values min-count="1" />
 		/// </override>
 		public List<ProviderScriptBlock> blocks;

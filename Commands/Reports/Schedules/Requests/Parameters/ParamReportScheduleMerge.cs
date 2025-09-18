@@ -15,12 +15,10 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Identifier of the <see cref="ReportTemplate"/> used to help create results.
 		/// </summary>
-		/// <override required="create" />
 		public ulong? template;
 		/// <summary>
 		/// Name for the <see cref="ReportSchedule"/>.
 		/// </summary>
-		/// <override required="create" max-length="100" />
 		public string name;
 		/// <summary>
 		/// Notes for the <see cref="ReportSchedule"/>.
@@ -30,7 +28,6 @@ namespace Trakit.Commands {
 		/// The user which owns the schedule.
 		/// When report results are created, they will be created with this user's <see cref="Asset"/> permissions.
 		/// </summary>
-		/// <override required="create" format="email" />
 		public string owner;
 		/// <summary>
 		/// Indicates whether this schedule is allowed to run.
@@ -39,7 +36,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The recurring schedule to generate report results.
 		/// </summary>
-		/// <override required="create" />
 		public ParamReportRecurrence repetition;
 		/// <summary>
 		/// Specified parameters for the report logic, targeted <see cref="Asset"/>s, and filtering Places.

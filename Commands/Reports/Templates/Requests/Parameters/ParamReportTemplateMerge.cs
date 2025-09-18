@@ -28,7 +28,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The kind of logic used to build the report results.
 		/// </summary>
-		/// <override required="create" />
 		public ReportType? kind;
 		/// <summary>
 		/// Specified parameters for the report logic, targeted <see cref="Asset"/>s, and filtering <see cref="Place"/>s and/or regions.

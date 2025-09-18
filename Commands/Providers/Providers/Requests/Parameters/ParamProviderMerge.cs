@@ -28,7 +28,6 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The type of <see cref="Provider"/>.
 		/// </summary>
-		/// <override required="create" />
 		public ProviderType? kind;
 		/// <summary>
 		/// A reference to the <see cref="Asset"/> with which to provide events.
@@ -37,12 +36,10 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Identifier of the <see cref="ProviderConfig"/>/<see cref="ProviderConfiguration"/> this <see cref="Provider"/> will use.
 		/// </summary>
-		/// <override required="create" />
 		public ulong? config;
 		/// <summary>
 		/// The phone number this <see cref="Provider"/> uses (if known).
 		/// </summary>
-		/// <override format="phone" />
 		public ulong? phone;
 		/// <summary>
 		/// The password required to communicate and program this <see cref="Provider"/>.

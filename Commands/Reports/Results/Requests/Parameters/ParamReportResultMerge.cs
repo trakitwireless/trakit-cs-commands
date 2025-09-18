@@ -15,22 +15,18 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Identifier of the <see cref="ReportTemplate"/> used to help create these <see cref="ReportResult"/>.
 		/// </summary>
-		/// <override required="create (simple)" />
 		public ulong? template;
 		/// <summary>
 		/// The <see cref="Company"/> to which these report <see cref="ReportResult"/> belongs.
 		/// </summary>
-		/// <override required="create (complex)" />
 		public ulong? company;
 		/// <summary>
 		/// The kind of logic used to build the report <see cref="ReportResult"/>.
 		/// </summary>
-		/// <override required="create (complex)" />
 		public ReportType? kind;
 		/// <summary>
 		/// Name for the report <see cref="ReportResult"/>.
 		/// </summary>
-		/// <override required="create" max-length="100" />
 		public string name;
 		/// <summary>
 		/// Notes for these report <see cref="ReportResult"/>.
@@ -45,13 +41,11 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Specified parameters for the report logic, targeted <see cref="Asset"/>s, and filtering <see cref="Place"/>s and/or regions.
 		/// </summary>
-		/// <override required="create (complex)" />
 		public ParamReportOptions options;
 		/// <summary>
 		/// The <see cref="Timezone.code"/> of the local timezone used to calculate times.
 		/// </summary>
 		/// <seealso cref="Timezone.code" />
-		/// <override required="create" type="System.String" format="codified" />
 		public TimeZoneInfo timezone;
 	}
 }

@@ -16,13 +16,11 @@ namespace Trakit.Commands {
 		/// The <see cref="Asset"/> that this <see cref="Message"/> was sent from or to.
 		/// After creation, this value is read-only.
 		/// </summary>
-		/// <override required="create" />
 		public ulong? asset;
 		/// <summary>
 		/// The kind of protocol used for this <see cref="Message"/>.
 		/// After creation, this value is read-only.
 		/// </summary>
-		/// <override required="create" />
 		public MessageType? kind;
 		/// <summary>
 		/// The folder where this <see cref="Message"/> is stored.
@@ -32,7 +30,6 @@ namespace Trakit.Commands {
 		/// Optional to address used when creating the <see cref="Message"/> if no messaging address is available.
 		/// After creation, this value is read-only.
 		/// </summary>
-		/// <override required="create" />
 		public string to;
 		/// <summary>
 		/// The <see cref="Message"/> subject field.
@@ -44,7 +41,6 @@ namespace Trakit.Commands {
 		/// The body of the <see cref="Message"/>.
 		/// After creation, this value is read-only.
 		/// </summary>
-		/// <override required="create" />
 		public string body;
 		/// <summary>
 		/// Set to true to log that the <see cref="Message"/> was received and read by yourself.
