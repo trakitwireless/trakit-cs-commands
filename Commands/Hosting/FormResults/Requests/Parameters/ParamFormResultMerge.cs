@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using Trakit.Objects;
 
 namespace Trakit.Commands {
@@ -14,6 +15,7 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The unique identifier of the <see cref="Asset"/> filling out this form.
 		/// </summary>
+		[JsonProperty(NullValueHandling = NullValueHandling.Include)]
 		public ulong? asset;
 		/// <summary>
 		/// The unique identifier of the <see cref="FormTemplate"/> for this form.
