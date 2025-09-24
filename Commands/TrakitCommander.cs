@@ -80,6 +80,19 @@ namespace Trakit.Commands {
 			_sessionId = sessionId;
 		}
 		/// <summary>
+		/// Sets the authentication context based on the provided account information.
+		/// </summary>
+		/// <param name="account">An instance of <see cref="RepSelfGet"/> containing the account details.</param>
+		public void SetAuth(RepSelfGet account) {
+			if (account.user != null) {
+				this.SetAuth(Guid.Parse(account.ghostId));
+			} else if (account.machine != null) {
+				this.SetAuth(account.machine);
+			} else {
+				this.SetAuth();
+			}
+		}
+		/// <summary>
 		/// Unsets the authentication mechanism so that requests are sent without any.
 		/// </summary>
 		public void SetAuth() {

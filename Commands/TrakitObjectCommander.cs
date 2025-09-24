@@ -12,7 +12,7 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Details of the <see cref="User"/> or <see cref="Machine"/> who is connected to the underlying Trak-iT API service.
 		/// </summary>
-		public RepSelfGet Self { get; protected set; }
+		public RepSelfGet Account { get; protected set; }
 
 		#region Commands - Self
 		/// <summary>
@@ -26,13 +26,14 @@ namespace Trakit.Commands {
 				case ErrorCode.passwordExpired:
 				case ErrorCode.sessionExpired:
 				case ErrorCode.userNotLoggedIn:
-					this.Self = reply;
+					this.Account = reply;
 					break;
 				default:
-					this.Self = default;
+					this.Account = default;
 					break;
 			}
-			return this.Self;
+			this.SetAuth(this.Account);
+			return this.Account;
 		}
 
 		/// <summary>
@@ -43,16 +44,20 @@ namespace Trakit.Commands {
 		/// <param name="password">Your password.</param>
 		/// <param name="userAgent">Optional string to identify this software.</param>
 		/// <returns>The <see cref="RespSelfGet"/>, which contains a <see cref="SelfUser"/> when successful.</returns>
-		public async Task<RepSelfGet> Login(string username, string password, string userAgent = default) {
-			this.Self = await this.Command<RepSelfGet>(new PaySelfLogin() {
+		public async Task<RepSelfGet> Login(
+			string username, 
+			string password, 
+			string userAgent = default
+		) {
+			this.Account = await this.Command<RepSelfGet>(new PaySelfLogin {
 				username = username,
 				password = password,
 				userAgent = userAgent,
 			});
-			if (this.Self.errorCode == ErrorCode.success && Guid.TryParse(this.Self.ghostId, out Guid sessionId)) {
+			if (this.Account.errorCode == ErrorCode.success && Guid.TryParse(this.Account.ghostId, out Guid sessionId)) {
 				this.SetAuth(sessionId);
 			}
-			return this.Self;
+			return this.Account;
 		}
 		/// <summary>
 		/// Sends a logout command, and if successful, removes the current session using <see cref="SetAuth()"/>.
@@ -60,13 +65,8 @@ namespace Trakit.Commands {
 		/// <returns></returns>
 		public async Task<RepSelfLogout> Logout() {
 			var reply = await this.Command<RepSelfLogout>(new PaySelfLogout());
-			switch (reply.errorCode) {
-				case ErrorCode.success:
-				case ErrorCode.sessionExpired:
-					this.SetAuth();
-					this.Self = default;
-					break;
-			}
+			this.SetAuth();
+			this.Account = default;
 			return reply;
 		}
 
@@ -87,17 +87,17 @@ namespace Trakit.Commands {
 		/// <param name="pictures"></param>
 		/// <returns></returns>
 		public Task<Reply> UpdateContact(
-			string name,
-			string notes,
-			Dictionary<string, string> otherNames,
-			Dictionary<string, string> emails,
-			Dictionary<string, ulong?> phones,
-			Dictionary<string, string> addresses,
-			Dictionary<string, Uri> urls,
-			Dictionary<string, DateTime?> dates,
-			Dictionary<string, string> options,
-			List<string> roles,
-			List<ulong> pictures
+			string name = default,
+			string notes = default,
+			Dictionary<string, string> otherNames = default,
+			Dictionary<string, string> emails = default,
+			Dictionary<string, ulong?> phones = default,
+			Dictionary<string, string> addresses = default,
+			Dictionary<string, Uri> urls = default,
+			Dictionary<string, DateTime?> dates = default,
+			Dictionary<string, string> options = default,
+			List<string> roles = default,
+			List<ulong> pictures = default
 		) => this.Command<Reply>(new PaySelfContact() {
 			contact = new ParamSelfContactMerge() {
 				name = name,
@@ -122,7 +122,7 @@ namespace Trakit.Commands {
 		public Task<RepSelfPasswordMerge> UpdatePassword(
 			string oldPassword,
 			string newPassword
-		) => this.Command<RepSelfPasswordMerge>(new PaySelfPassword() {
+		) => this.Command<RepSelfPasswordMerge>(new PaySelfPassword {
 			current = oldPassword,
 			password = newPassword,
 		});
@@ -137,13 +137,13 @@ namespace Trakit.Commands {
 		/// <param name="options"></param>
 		/// <returns></returns>
 		public Task<Reply> UpdatePreferences(
-			string language,
-			TimeZoneInfo timezone,
-			List<UserNotifications> notify,
-			Dictionary<string, string> formats,
-			Dictionary<string, SystemsOfUnits?> measurements,
-			Dictionary<string, string> options
-		) => this.Command<Reply>(new PaySelfPreferences() {
+			string language = default,
+			TimeZoneInfo timezone = default,
+			List<UserNotifications> notify = default,
+			Dictionary<string, string> formats = default,
+			Dictionary<string, SystemsOfUnits?> measurements = default,
+			Dictionary<string, string> options = default
+		) => this.Command<Reply>(new PaySelfPreferences {
 			language = language,
 			timezone = timezone,
 			notify = notify,
