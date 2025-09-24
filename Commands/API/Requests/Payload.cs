@@ -11,7 +11,7 @@ namespace Trakit.Commands {
 	/// This class exists solely to create an inheritance chain.
 	/// Child classes should contain members required to execute a command.
 	/// </remarks>
-	public class Payload {
+	public abstract class Payload {
 		/// Used to split the Payload class name into pieces to help create commands
 		static readonly Regex SPLITTER = new Regex("Pay([A-Z][a-z]+)+?((?:Batch)?(?:Get|List|Merge|Delete|Restore|Suspend|Revive|Cancel|Change))(By.+)?", RegexOptions.Compiled);
 		/// <summary>
