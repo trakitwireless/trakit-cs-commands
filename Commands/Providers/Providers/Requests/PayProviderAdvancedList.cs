@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Trakit.Objects;
+﻿using Trakit.Objects;
 
 namespace Trakit.Commands {
 	/// <summary>
@@ -26,25 +25,12 @@ namespace Trakit.Commands {
 		public ParamId company { get; set; }
 	}
 	/// <summary>
-	/// Gets the list of <see cref="ProviderAdvanced"/>s for the specified <see cref="Company"/> only if the <see cref="ProviderAdvancedGeneral.labels"/> matches all of the given <see cref="Parameters.labels"/>.
+	/// Gets the list of <see cref="ProviderAdvanced"/>s for the specified <see cref="Company"/>.
 	/// </summary>
-	public class PayProviderAdvancedListByCompanyAndLabels : PayProviderAdvancedListByCompany, IPayListByLabels {
+	public class PayProviderAdvancedListByConfig: PayProviderAdvancedList {
 		/// <summary>
-		/// The parsed labels given as input.
+		/// Identifier of the <see cref="Company"/> to which this collection belongs.
 		/// </summary>
-		/// <seealso cref="ProviderGeneral.labels"/>
-		public List<string> labels { get; set; }
-	}
-	/// <summary>
-	/// Gets the list of <see cref="ProviderAdvanced"/>s for the specified <see cref="Company"/> only if one of the specified <see cref="ProviderAdvancedGeneral.references"/> fields match.
-	/// If no references are specified, it will match any <see cref="ProviderAdvanced"/> with no references.
-	/// If a reference value is null, it will match any <see cref="ProviderAdvanced"/> without that reference key.
-	/// </summary>
-	public class PayProviderAdvancedListByCompanyAndRefPairs : PayProviderAdvancedListByCompany, IPayListByReferences {
-		/// <summary>
-		/// The parsed references given as input.
-		/// </summary>
-		/// <seealso cref="ProviderAdvancedGeneral.references"/>
-		public Dictionary<string, string> references { get; set; }
+		public ParamId config { get; set; }
 	}
 }
