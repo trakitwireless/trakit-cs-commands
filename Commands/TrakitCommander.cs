@@ -49,7 +49,7 @@ namespace Trakit.Commands {
 			if (query.Count > 0) {
 				endpoint.Query += "&" + string.Join(
 					"&",
-					this.Query.Select(p => $"{HttpUtility.UrlEncode(p.Key)}={HttpUtility.UrlEncode(p.Value)}")
+					query.Select(p => $"{HttpUtility.UrlEncode(p.Key)}={HttpUtility.UrlEncode(p.Value)}")
 				);
 			}
 			if (endpoint.Query.Length > 1 && endpoint.Query[1] == '&') {
