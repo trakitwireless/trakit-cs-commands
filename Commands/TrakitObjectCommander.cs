@@ -9,10 +9,20 @@ namespace Trakit.Commands {
 	/// </summary>
 	/// <typeparam name="TClient">.NET class used to communicate over the Internet.</typeparam>
 	public abstract class TrakitObjectCommander<TClient> : TrakitCommander<TClient> where TClient : IDisposable {
-		/// <summary>
-		/// Details of the <see cref="User"/> or <see cref="Machine"/> who is connected to the underlying Trak-iT API service.
-		/// </summary>
-		public RepSelfGet Account { get; protected set; }
+
+		protected TrakitObjectCommander(Uri baseAddress) : base(baseAddress) { }
+		public TrakitObjectCommander(RepSelfGet account, Uri baseAddress) : base(baseAddress) {
+			this.SetAuth(account);
+		}
+		public TrakitObjectCommander(SelfMachine machine, Uri baseAddress) : base(baseAddress) {
+			this.SetAuth(machine);
+		}
+		public TrakitObjectCommander(Machine machine, Uri baseAddress) : base(baseAddress) {
+			this.SetAuth(machine);
+		}
+		public TrakitObjectCommander(Guid sessionId, Uri baseAddress) : base(baseAddress) {
+			this.SetAuth(sessionId);
+		}
 
 		#region Commands - Self
 		/// <summary>
@@ -21,19 +31,8 @@ namespace Trakit.Commands {
 		/// <returns></returns>
 		public async Task<RepSelfGet> GetSelfDetails() {
 			var reply = await this.Command<RepSelfGet>(new PaySelfGet());
-			switch (reply.errorCode) {
-				case ErrorCode.success:
-				case ErrorCode.passwordExpired:
-				case ErrorCode.sessionExpired:
-				case ErrorCode.userNotLoggedIn:
-					this.Account = reply;
-					break;
-				default:
-					this.Account = default;
-					break;
-			}
-			this.SetAuth(this.Account);
-			return this.Account;
+			this.SetAuth(reply);
+			return reply;
 		}
 
 		/// <summary>
@@ -45,19 +44,17 @@ namespace Trakit.Commands {
 		/// <param name="userAgent">Optional string to identify this software.</param>
 		/// <returns>The <see cref="RespSelfGet"/>, which contains a <see cref="SelfUser"/> when successful.</returns>
 		public async Task<RepSelfGet> Login(
-			string username, 
-			string password, 
+			string username,
+			string password,
 			string userAgent = default
 		) {
-			this.Account = await this.Command<RepSelfGet>(new PaySelfLogin {
+			var reply = await this.Command<RepSelfGet>(new PaySelfLogin {
 				username = username,
 				password = password,
 				userAgent = userAgent,
 			});
-			if (this.Account.errorCode == ErrorCode.success && Guid.TryParse(this.Account.ghostId, out Guid sessionId)) {
-				this.SetAuth(sessionId);
-			}
-			return this.Account;
+			this.SetAuth(reply);
+			return reply;
 		}
 		/// <summary>
 		/// Sends a logout command, and if successful, removes the current session using <see cref="SetAuth()"/>.
@@ -65,8 +62,13 @@ namespace Trakit.Commands {
 		/// <returns></returns>
 		public async Task<RepSelfLogout> Logout() {
 			var reply = await this.Command<RepSelfLogout>(new PaySelfLogout());
-			this.SetAuth();
-			this.Account = default;
+			this.SetAuth(new RepSelfGet() {
+				errorCode = reply.errorCode,
+				message = reply.message,
+				errorDetails = reply.errorDetails,
+				ghostId = reply.ghostId,
+				expiry = reply.expiry,
+			});
 			return reply;
 		}
 

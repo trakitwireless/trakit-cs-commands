@@ -13,6 +13,10 @@ namespace Trakit.Commands {
 	/// <typeparam name="TClient">.NET class used to communicate over the Internet.</typeparam>
 	public abstract class TrakitCommander<TClient> where TClient : IDisposable {
 		/// <summary>
+		/// Details of the <see cref="User"/> or <see cref="Machine"/> who is connected to the underlying Trak-iT API service.
+		/// </summary>
+		public RepSelfGet Account { get; protected set; }
+		/// <summary>
 		/// <see cref="Uri"/> of the underlying Trak-iT API service.
 		/// </summary>
 		public Uri BaseAddress { get; protected set; }
@@ -34,6 +38,23 @@ namespace Trakit.Commands {
 		/// </summary>
 		public virtual TClient Client { get; protected set; }
 
+		protected TrakitCommander(Uri baseAddress) {
+			this.BaseAddress = baseAddress;
+			this.SetAuth();
+		}
+		public TrakitCommander(RepSelfGet account, Uri baseAddress) : this(baseAddress) {
+			this.SetAuth(account);
+		}
+		public TrakitCommander(SelfMachine machine, Uri baseAddress) : this(baseAddress) {
+			this.SetAuth(machine);
+		}
+		public TrakitCommander(Machine machine, Uri baseAddress) : this(baseAddress) {
+			this.SetAuth(machine);
+		}
+		public TrakitCommander(Guid sessionId, Uri baseAddress) : this(baseAddress) {
+			this.SetAuth(sessionId);
+		}
+
 		/// <summary>
 		/// Returns the <see cref="BaseAddress"/> with the appropriate <paramref name="path"/>, <see cref="Query"/> values (and session token if applicable).
 		/// </summary>
@@ -43,9 +64,6 @@ namespace Trakit.Commands {
 			var endpoint = new UriBuilder(this.BaseAddress);
 			endpoint.Path = path ?? "";
 			var query = new Dictionary<string, string>(this.Query);
-			if (_sessionId != default) {
-				query["ghostId"] = _sessionId.ToString();
-			}
 			if (query.Count > 0) {
 				endpoint.Query += "&" + string.Join(
 					"&",
@@ -58,48 +76,42 @@ namespace Trakit.Commands {
 			return endpoint;
 		}
 
-		#region Authorization
-		// saved API credentials when using a service account
-		protected Machine _machine { get; private set; }
-		// saved session identifier when using a user account
-		protected Guid _sessionId { get; private set; }
-		/// <summary>
-		/// Saves the authentication mechanism as a <see cref="Machine"/>.
-		/// </summary>
-		/// <param name="machine"></param>
-		public void SetAuth(Machine machine) {
-			this.SetAuth();
-			_machine = machine;
-		}
-		/// <summary>
-		/// Saves the authentication mechanism as a <see cref="Session.id"/>.
-		/// </summary>
-		/// <param name="sessionId"></param>
-		public void SetAuth(Guid sessionId) {
-			this.SetAuth();
-			_sessionId = sessionId;
-		}
 		/// <summary>
 		/// Sets the authentication context based on the provided account information.
 		/// </summary>
 		/// <param name="account">An instance of <see cref="RepSelfGet"/> containing the account details.</param>
-		public void SetAuth(RepSelfGet account) {
-			if (account.user != null) {
-				this.SetAuth(Guid.Parse(account.ghostId));
-			} else if (account.machine != null) {
-				this.SetAuth(account.machine);
-			} else {
-				this.SetAuth();
-			}
-		}
+		public void SetAuth(RepSelfGet account = default)
+			=> this.Account = account
+						?? new RepSelfGet() {
+							errorCode = ErrorCode.unknown,
+							message = "Not authenticated.",
+						};
 		/// <summary>
-		/// Unsets the authentication mechanism so that requests are sent without any.
+		/// Saves the authentication mechanism as a <see cref="Machine"/>.
 		/// </summary>
-		public void SetAuth() {
-			_machine = default;
-			_sessionId = default;
-		}
-		#endregion Authorization
+		/// <param name="machine"></param>
+		public void SetAuth(SelfMachine machine) => this.SetAuth(new RepSelfGet() {
+			errorCode = ErrorCode.success,
+			message = "Authenticated with machine.",
+			machine = machine,
+		});
+		/// <summary>
+		/// Saves the authentication mechanism as a <see cref="Machine"/>.
+		/// </summary>
+		/// <param name="machine"></param>
+		public void SetAuth(Machine machine) => this.SetAuth(new SelfMachine() {
+			key = machine.key,
+			secret = machine.secret,
+		});
+		/// <summary>
+		/// Saves the authentication mechanism as a <see cref="Session.id"/>.
+		/// </summary>
+		/// <param name="sessionId"></param>
+		public void SetAuth(Guid sessionId) => this.SetAuth(new RepSelfGet() {
+			errorCode = ErrorCode.success,
+			message = "Authenticated with session token.",
+			ghostId = sessionId.ToString(),
+		});
 
 		/// <summary>
 		/// Sends a command to the underlying service, and returns a <see cref="Task"/> that completes when a reply is received.
