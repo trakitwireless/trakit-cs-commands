@@ -14,6 +14,8 @@ namespace Trakit.Tools {
 			user = new User() {
 				General = obj.ToObject<UserGeneral>(serializer),
 				Advanced = obj.ToObject<UserAdvanced>(serializer),
+				Authentication = obj.ToObject<UserAuthentication>(serializer),
+				State = obj.ToObject<UserState>(serializer),
 			};
 			user.v = obj["v"].Select(p => (int)p).ToArray();
 			return user;
