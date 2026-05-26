@@ -34,7 +34,7 @@ namespace Trakit.Commands {
 		/// <seealso cref="Icon.id" />
 		public ulong? icon;
 		/// <summary>
-		/// A list of <format id="codified"/>&amp;nbsp;<see cref="CompanyStyles.labels">label</see> names to categorize/organize this <see cref="Asset"/>.
+		/// A list of <format id="codified"/>&amp;nbsp;<see cref="CompanyStyle.labels">label</see> names to categorize/organize this <see cref="Asset"/>.
 		/// </summary>
 		public List<string> labels;
 		/// <summary>

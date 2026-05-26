@@ -132,7 +132,7 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// Company's label and tag styles.
 		/// </summary>
-		/// <seealso cref="CompanyStyles"/>
+		/// <seealso cref="CompanyStyle"/>
 		companyLabels,
 		/// <summary>
 		/// Company's <see cref="SessionPolicy"/> and <see cref="PasswordPolicy"/>.

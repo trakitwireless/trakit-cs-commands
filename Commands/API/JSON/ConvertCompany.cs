@@ -11,10 +11,7 @@ namespace Trakit.Tools {
 	public class ConvertCompany : TrakitConverter<Company> {
 		public override Company ConvertFrom(JsonReader reader, Type type, Company company, bool existing, JsonSerializer serializer) {
 			var obj = JObject.Load(reader);
-			if (
-				bool.TryParse(obj["deleted"]?.ToString(), out _)
-				|| bool.TryParse(obj["suspended"]?.ToString(), out _)
-			) {
+			if (bool.TryParse(obj["deleted"]?.ToString(), out _)) {
 				company = new Company() {
 					General = obj.ToObject<CompanyGeneral>(serializer),
 				};
@@ -22,8 +19,8 @@ namespace Trakit.Tools {
 				company = new Company() {
 					General = obj.ToObject<CompanyGeneral>(serializer),
 					Directory = obj.ToObject<CompanyDirectory>(serializer),
-					Policies = obj.ToObject<CompanyPolicies>(serializer),
-					Styles = obj.ToObject<CompanyStyles>(serializer),
+					Policy = obj.ToObject<CompanyPolicy>(serializer),
+					Style = obj.ToObject<CompanyStyle>(serializer),
 				};
 				if (obj["reseller"]?.Type == JTokenType.Object) {
 					company.Reseller = obj["reseller"].ToObject<CompanyReseller>(serializer);

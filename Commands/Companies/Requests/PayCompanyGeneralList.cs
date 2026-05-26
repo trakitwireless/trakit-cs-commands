@@ -22,13 +22,13 @@ namespace Trakit.Commands {
 		public ParamId company { get; set; }
 	}
 	/// <summary>
-	/// Gets the list of <see cref="CompanyGeneral"/>s for the specified <see cref="Company"/> only if the <see cref="CompanyGeneral.labels"/> matches all of the given <see cref="CompanyStyles.labels"/>.
+	/// Gets the list of <see cref="CompanyGeneral"/>s for the specified <see cref="Company"/> only if the <see cref="CompanyGeneral.labels"/> matches all of the given <see cref="CompanyStyle.labels"/>.
 	/// </summary>
 	public class PayCompanyGeneralListByCompanyAndLabels : PayCompanyGeneralListByCompany, IPayListByLabels {
 		/// <summary>
 		/// The parsed labels given as input.
 		/// </summary>
-		/// <seealso cref="CompanyStyles.labels"/>
+		/// <seealso cref="CompanyStyle.labels"/>
 		public List<string> labels { get; set; }
 	}
 	/// <summary>
