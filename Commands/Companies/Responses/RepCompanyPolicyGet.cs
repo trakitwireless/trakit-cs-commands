@@ -4,10 +4,10 @@ namespace Trakit.Commands {
 	/// <summary>
 	/// A container for the <see cref="companyPolicies"/>.
 	/// </summary>
-	public class RepCompanyPoliciesGet : Reply {
+	public class RepCompanyPolicyGet : Reply {
 		/// <summary>
-		/// The requested <see cref="CompanyPolicies"/>.
+		/// The requested <see cref="CompanyPolicy"/>.
 		/// </summary>
-		public CompanyPolicies companyPolicies;
+		public CompanyPolicy companyPolicy;
 	}
 }

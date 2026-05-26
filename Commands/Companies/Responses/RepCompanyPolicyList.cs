@@ -3,19 +3,19 @@ using Trakit.Objects;
 
 namespace Trakit.Commands {
 	/// <summary>
-	/// A container for the requested <see cref="companyPolicies"/>.
+	/// A container for the requested <see cref="companyPolicy"/>.
 	/// </summary>
-	public abstract class RepCompanyPoliciesList : Reply {
+	public abstract class RepCompanyPolicyList : Reply {
 		/// <summary>
-		/// The list of requested <see cref="CompanyPolicies"/>s.
+		/// The list of requested <see cref="CompanyPolicy"/>s.
 		/// </summary>
-		public CompanyPolicies[] companyPolicies;
+		public CompanyPolicy[] companyPolicy;
 	}
 
 	/// <summary>
 	/// A container owner <see cref="Company"/> of the collection.
 	/// </summary>
-	public class RepCompanyPoliciesListByCompany : RepCompanyPoliciesList {
+	public class RepCompanyPolicyListByCompany : RepCompanyPolicyList {
 		/// <summary>
 		/// Identifier of the <see cref="Company"/> to which this collection belongs.
 		/// </summary>
@@ -24,7 +24,7 @@ namespace Trakit.Commands {
 	/// <summary>
 	/// A container owner <see cref="Company"/> of the collection.
 	/// </summary>
-	public class RepCompanyPoliciesListByCompanyAndLabels : RepCompanyPoliciesListByCompany {
+	public class RepCompanyPolicyListByCompanyAndLabels : RepCompanyPolicyListByCompany {
 		/// <summary>
 		/// The labels given as input.
 		/// </summary>
@@ -34,7 +34,7 @@ namespace Trakit.Commands {
 	/// <summary>
 	/// A container owner <see cref="Company"/> of the collection.
 	/// </summary>
-	public class RepCompanyPoliciesListByCompanyAndRefPairs : RepCompanyPoliciesListByCompany {
+	public class RepCompanyPolicyListByCompanyAndRefPairs : RepCompanyPolicyListByCompany {
 		/// <summary>
 		/// The reference string given as input.
 		/// </summary>

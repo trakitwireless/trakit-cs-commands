@@ -5,17 +5,17 @@ namespace Trakit.Commands {
 	/// <summary>
 	/// A container for the requested <see cref="companyStyless"/>.
 	/// </summary>
-	public abstract class RepCompanyStylesList : Reply {
+	public abstract class RepCompanyStyleList : Reply {
 		/// <summary>
-		/// The list of requested <see cref="CompanyStyles"/>s.
+		/// The list of requested <see cref="CompanyStyle"/>s.
 		/// </summary>
-		public CompanyStyles[] companyStyless;
+		public CompanyStyle[] companyStyless;
 	}
 
 	/// <summary>
 	/// A container owner <see cref="Company"/> of the collection.
 	/// </summary>
-	public class RepCompanyStylesListByCompany : RepCompanyStylesList {
+	public class RepCompanyStyleListByCompany : RepCompanyStyleList {
 		/// <summary>
 		/// Identifier of the <see cref="Company"/> to which this collection belongs.
 		/// </summary>
@@ -24,21 +24,21 @@ namespace Trakit.Commands {
 	/// <summary>
 	/// A container owner <see cref="Company"/> of the collection.
 	/// </summary>
-	public class RepCompanyStylesListByCompanyAndLabels : RepCompanyStylesListByCompany {
+	public class RepCompanyStyleListByCompanyAndLabels : RepCompanyStyleListByCompany {
 		/// <summary>
 		/// The labels given as input.
 		/// </summary>
-		/// <seealso cref="CompanyStyles.labels"/>
+		/// <seealso cref="CompanyStyle.labels"/>
 		public string[] labels;
 	}
 	/// <summary>
 	/// A container owner <see cref="Company"/> of the collection.
 	/// </summary>
-	public class RepCompanyStylesListByCompanyAndRefPairs : RepCompanyStylesListByCompany {
+	public class RepCompanyStyleListByCompanyAndRefPairs : RepCompanyStyleListByCompany {
 		/// <summary>
 		/// The reference string given as input.
 		/// </summary>
-		/// <seealso cref="CompanyStyles.references"/>
+		/// <seealso cref="CompanyStyle.references"/>
 		public Dictionary<string, string> references;
 	}
 }
