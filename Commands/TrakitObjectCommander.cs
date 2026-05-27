@@ -10,19 +10,7 @@ namespace Trakit.Commands {
 	/// <typeparam name="TClient">.NET class used to communicate over the Internet.</typeparam>
 	public abstract class TrakitObjectCommander<TClient> : TrakitCommander<TClient> where TClient : IDisposable {
 
-		protected TrakitObjectCommander(Uri baseAddress) : base(baseAddress) { }
-		public TrakitObjectCommander(RepSelfGet account, Uri baseAddress) : base(baseAddress) {
-			this.SetAuth(account);
-		}
-		public TrakitObjectCommander(SelfMachine machine, Uri baseAddress) : base(baseAddress) {
-			this.SetAuth(machine);
-		}
-		public TrakitObjectCommander(Machine machine, Uri baseAddress) : base(baseAddress) {
-			this.SetAuth(machine);
-		}
-		public TrakitObjectCommander(Guid sessionId, Uri baseAddress) : base(baseAddress) {
-			this.SetAuth(sessionId);
-		}
+		public TrakitObjectCommander(RepSelfGet account, Uri baseAddress) : base(account, baseAddress) { }
 
 		#region Commands - Self
 		/// <summary>

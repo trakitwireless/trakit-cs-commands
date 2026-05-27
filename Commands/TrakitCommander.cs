@@ -45,22 +45,13 @@ namespace Trakit.Commands {
 		public TrakitCommander(RepSelfGet account, Uri baseAddress) : this(baseAddress) {
 			this.SetAuth(account);
 		}
-		public TrakitCommander(SelfMachine machine, Uri baseAddress) : this(baseAddress) {
-			this.SetAuth(machine);
-		}
-		public TrakitCommander(Machine machine, Uri baseAddress) : this(baseAddress) {
-			this.SetAuth(machine);
-		}
-		public TrakitCommander(Guid sessionId, Uri baseAddress) : this(baseAddress) {
-			this.SetAuth(sessionId);
-		}
 
 		/// <summary>
 		/// Returns the <see cref="BaseAddress"/> with the appropriate <paramref name="path"/>, <see cref="Query"/> values (and session token if applicable).
 		/// </summary>
 		/// <param name="path"></param>
 		/// <returns></returns>
-		protected UriBuilder CreateBaseUri(string path = null) {
+		protected UriBuilder CreateBaseUri(string path = default) {
 			var endpoint = new UriBuilder(this.BaseAddress);
 			endpoint.Path = path ?? "";
 			var query = new Dictionary<string, string>(this.Query);
@@ -111,6 +102,14 @@ namespace Trakit.Commands {
 			errorCode = ErrorCode.success,
 			message = "Authenticated with session token.",
 			ghostId = sessionId.ToString(),
+		});
+		/// <summary>
+		/// Saves the authentication mechanism as a <see cref="Machine"/>.
+		/// </summary>
+		/// <param name="sessionId"></param>
+		public void SetAuth(string machineKey, string machineSecret) => this.SetAuth(new Machine() {
+			key = machineKey,
+			secret = machineSecret,
 		});
 
 		/// <summary>
