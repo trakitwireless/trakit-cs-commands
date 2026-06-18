@@ -21,11 +21,11 @@ namespace Trakit.Commands {
 		/// </summary>
 		public Uri BaseAddress { get; protected set; }
 		/// <summary>
-		/// Additional (optional) values added to the query-string of the connection request.
+		/// Additional (optional) values added to the query-string of each request.
 		/// </summary>
 		public readonly Dictionary<string, string> Query = new Dictionary<string, string>();
 		/// <summary>
-		/// Additional (optional) HTTP headers added to the connection request.
+		/// Additional (optional) HTTP headers added to each request.
 		/// </summary>
 		public readonly Dictionary<string, string> Headers = new Dictionary<string, string>();
 
@@ -47,22 +47,30 @@ namespace Trakit.Commands {
 		}
 
 		/// <summary>
-		/// Returns the <see cref="BaseAddress"/> with the appropriate <paramref name="path"/>, <see cref="Query"/> values (and session token if applicable).
+		/// Returns the <see cref="BaseAddress"/> with the appropriate <paramref name="pathAndQuery"/>, and optional <see cref="Query"/> values.
+		/// </summary>
+		/// <param name="pathAndQuery"></param>
+		/// <returns></returns>
+		protected UriBuilder CreateBaseUri(string pathAndQuery = default) {
+			var parts = pathAndQuery?.Split('?') ?? new string[1];
+			return this.CreateBaseUri(parts[0], string.Join("?", parts.Skip(1)));
+		}
+		/// <summary>
+		/// Returns the <see cref="BaseAddress"/> with the appropriate <paramref name="pathAndQuery"/>, and optional <see cref="Query"/> values.
 		/// </summary>
 		/// <param name="path"></param>
+		/// <param name="query"></param>
 		/// <returns></returns>
-		protected UriBuilder CreateBaseUri(string path = default) {
+		protected UriBuilder CreateBaseUri(string path, string query = default) {
 			var endpoint = new UriBuilder(this.BaseAddress);
 			endpoint.Path = path ?? "";
-			var query = new Dictionary<string, string>(this.Query);
-			if (query.Count > 0) {
-				endpoint.Query += "&" + string.Join(
-					"&",
-					query.Select(p => $"{HttpUtility.UrlEncode(p.Key)}={HttpUtility.UrlEncode(p.Value)}")
-				);
-			}
-			if (endpoint.Query.Length > 1 && endpoint.Query[1] == '&') {
-				endpoint.Query = endpoint.Query.Substring(2);
+			endpoint.Query = query ?? "";
+			if (this.Query.Count > 0) {
+				endpoint.Query += (endpoint.Query.Length > 1 ? "&" : "")
+							+ string.Join(
+								"&",
+								this.Query.Select(p => $"{HttpUtility.UrlEncode(p.Key)}={HttpUtility.UrlEncode(p.Value)}")
+							);
 			}
 			return endpoint;
 		}
