@@ -38,63 +38,63 @@ namespace Trakit.Commands {
 		/// In these cases, treat the service version as most recent.
 		/// </summary>
 		wrongVersionKey,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// <see cref="User"/>'s session is expired or unknown.
 		/// </summary>
 		sessionExpired,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// Please login before all other operations.
 		/// </summary>
 		userNotLoggedIn,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// <see cref="User"/>'s session was forcibly killed by another user, or by <see cref="SessionPolicy"/>'s rules.
 		/// </summary>
 		sessionKilled,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// The session has ended.
 		/// </summary>
 		loggedOut,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// Invalid credentials.
 		/// </summary>
 		/// <remarks>
 		/// Is your caps-lock on?
 		/// </remarks>
 		invalidCredentials,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// The given client UserAgent is not allowed.
 		/// </summary>
 		applicationNotAllowed,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// IPAddress not allowed.
 		/// IP restrictions are in place, and the client IP is not in the allowed list.
 		/// </summary>
 		ipNotAllowed,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// Session is active from another client, and the <see cref="SessionPolicy"/>'s rules are set to <see cref="MultiUserPolicy.deny"/>.
 		/// </summary>
 		multiUserDenied,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// Password doesn't comply with the password policy.
 		/// See the <see cref="PasswordPolicy"/> for a reason as to why your password does not meet the criteria.
 		/// </summary>
 		noncompliantPassword,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// Your password has expired.  Please change your password.
 		/// An expired password does not mean your session has expired.
 		/// If you create a new session, it will ask you to update your password again.
 		/// </summary>
 		passwordExpired,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// When changing a password, it must not be the same as the previous password.
 		/// </summary>
 		samePassword,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// Unable to Kill the session.
 		/// </summary>
 		[Obsolete]
 		killSessionFailed,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// Session not found.
 		/// </summary>
 		sessionNotFound,
@@ -139,7 +139,7 @@ namespace Trakit.Commands {
 		/// <see cref="Company"/> not deleted.
 		/// </summary>
 		companyNotDeleted,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// <see cref="UserGroup"/> not found.
 		/// </summary>
 		userGroupNotFound,
@@ -239,20 +239,20 @@ namespace Trakit.Commands {
 		/// <see cref="ReportTemplate"/> not deleted.
 		/// </summary>
 		reportTemplateNotDeleted,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// <see cref="User"/> not found.
 		/// </summary>
 		userNotFound,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// <see cref="User"/> not deleted.
 		/// </summary>
 		userNotDeleted,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// Cannot access deleted <see cref="User"/>.
 		/// </summary>
 		[Obsolete("Throws userNotFound instead")]
 		deletedUser,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// Cannot kill your own Session, or delete/disable your own <see cref="User"/>.
 		/// </summary>
 		/// <remarks>
@@ -269,7 +269,7 @@ namespace Trakit.Commands {
 		/// </summary>
 		[Obsolete]
 		tagsListNotUnique,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// One or more <see cref="UserGroup"/>s in the list not found.
 		/// </summary>
 		userGroupsListNotFound,
@@ -292,12 +292,12 @@ namespace Trakit.Commands {
 		/// <see cref="DispatchTask"/> not found.
 		/// </summary>
 		dispatchTaskNotFound,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// <see cref="UserGroup"/> currently in use by one or more <see cref="User"/>s.
 		/// In order to delete a <see cref="UserGroup"/>, all <see cref="User"/>s must first be removed as members.
 		/// </summary>
 		userGroupInUse,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// <see cref="UserGroup"/> not deleted.
 		/// </summary>
 		userGroupNotDeleted,
@@ -317,19 +317,19 @@ namespace Trakit.Commands {
 		/// <see cref="Picture"/> not deleted.
 		/// </summary>
 		pictureNotDeleted,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// Unable to perform operation because resulting <see cref="UserPermission"/>s would be greater than your own.
 		/// </summary>
 		permissionEscalation,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// A <see cref="User"/> with this login already exists.
 		/// </summary>
 		userAlreadyExists,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// Session or connection not allowed due to flooding.
 		/// </summary>
 		sessionThrottled,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// One or more <see cref="User"/>s in the list not found.
 		/// </summary>
 		usersListNotFound,
@@ -380,7 +380,7 @@ namespace Trakit.Commands {
 		/// </summary>
 		elogNotFound,
 
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// <see cref="User"/> has been disabled.
 		/// </summary>
 		userDisabled,
@@ -582,15 +582,15 @@ namespace Trakit.Commands {
 		/// </summary>
 		nothing,
 
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// <see cref="Machine"/> not found.
 		/// </summary>
 		machineNotFound,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// <see cref="Machine"/> not deleted.
 		/// </summary>
 		machineNotDeleted,
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// The <see cref="Machine"/> cannot access the requested API.
 		/// </summary>
 		machineNotAllowed,
@@ -601,7 +601,7 @@ namespace Trakit.Commands {
 		/// </summary>
 		invalidOperation,
 
-		/// <summary sort="Users and Groups">
+		/// <summary sort="Accounts">
 		/// A client using a <see cref="Machine"/> is trying to access the system from an unknown URL.
 		/// </summary>
 		referrerNotAllowed,

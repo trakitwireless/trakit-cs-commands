@@ -4,7 +4,7 @@ namespace Trakit.Commands {
 	/// <summary>
 	/// Similar to the <see cref="Permission"/> object, but the <see cref="company"/>, <see cref="level"/>, <see cref="method"/>, and <see cref="labels"/> are all optional.
 	/// </summary>
-	/// <category>Users and Groups</category>
+	/// <category>Accounts</category>
 	public class ParamPermission {
 		/// <summary>
 		/// The <see cref="Company"/> that this permission targets.
