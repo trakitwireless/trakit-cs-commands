@@ -24,6 +24,10 @@ namespace Trakit.Tools {
 			_settings.Converters.Add(new StringEnumConverter());
 			_settings.Converters.Add(new ConvertDateTime());
 
+			/// <see cref="Trakit.Commands"/>
+			_settings.Converters.Add(new ConvertSelfUser());
+			_settings.Converters.Add(new ConvertErrorDetail());
+
 			/// <see cref="Trakit.Objects"/>
 			_settings.Converters.Add(new ConvertAsset());
 			_settings.Converters.Add(new ConvertCompany());
@@ -33,10 +37,6 @@ namespace Trakit.Tools {
 			_settings.Converters.Add(new ConvertTimezone());
 			_settings.Converters.Add(new ConvertIPAddress());
 			_settings.Converters.Add(new ConvertIPEndPoint());
-
-			/// <see cref="Trakit.Commands"/>
-			_settings.Converters.Add(new ConvertSelfUser());
-			_settings.Converters.Add(new ConvertErrorDetail());
 
 			/// for conversion
 			_serializer = JsonSerializer.CreateDefault(_settings);

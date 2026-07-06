@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using Trakit.Objects;
 
 namespace Trakit.Commands {
@@ -19,6 +20,7 @@ namespace Trakit.Commands {
 		/// <summary>
 		/// The <see cref="CompanyPolicy"/> for this <see cref="User"/>'s company.
 		/// </summary>
+		[JsonProperty("policies")]
 		public CompanyPolicy policy { get; set; }
 	}
 }
