@@ -225,6 +225,17 @@ namespace Trakit.Commands {
 		/// <seealso cref="UserAdvanced"/>
 		userAdvanced,
 		/// <summary>
+		/// Authentication details for a user, including MFA and SSO.
+		/// </summary>
+		/// <seealso cref="UserAuthentication"/>
+		userAuthentication,
+		/// <summary>
+		/// State flags for a user.
+		/// This information is mostly used by client applications, but can be used for debugging and troubleshooting.
+		/// </summary>
+		/// <seealso cref="UserState"/>
+		userState,
+		/// <summary>
 		/// Group information for easy access control.
 		/// </summary>
 		/// <seealso cref="UserGroup"/>
