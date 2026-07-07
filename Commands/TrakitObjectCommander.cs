@@ -9,8 +9,7 @@ namespace Trakit.Commands {
 	/// </summary>
 	/// <typeparam name="TClient">.NET class used to communicate over the Internet.</typeparam>
 	public abstract class TrakitObjectCommander<TClient> : TrakitCommander<TClient> where TClient : IDisposable {
-
-		public TrakitObjectCommander(
+		protected TrakitObjectCommander(
 			Uri baseAddress,
 			RepSelfGet account = default
 		) : base(
