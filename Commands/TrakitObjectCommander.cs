@@ -10,7 +10,13 @@ namespace Trakit.Commands {
 	/// <typeparam name="TClient">.NET class used to communicate over the Internet.</typeparam>
 	public abstract class TrakitObjectCommander<TClient> : TrakitCommander<TClient> where TClient : IDisposable {
 
-		public TrakitObjectCommander(RepSelfGet account, Uri baseAddress) : base(account, baseAddress) { }
+		public TrakitObjectCommander(
+			Uri baseAddress,
+			RepSelfGet account = default
+		) : base(
+			baseAddress,
+			account
+		) { }
 
 		#region Commands - Self
 		/// <summary>

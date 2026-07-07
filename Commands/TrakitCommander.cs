@@ -38,11 +38,11 @@ namespace Trakit.Commands {
 		/// </summary>
 		public virtual TClient Client { get; protected set; }
 
-		protected TrakitCommander(Uri baseAddress) {
+		protected TrakitCommander(
+			Uri baseAddress,
+			RepSelfGet account = default
+		) {
 			this.BaseAddress = baseAddress;
-			this.SetAuth();
-		}
-		public TrakitCommander(RepSelfGet account, Uri baseAddress) : this(baseAddress) {
 			this.SetAuth(account);
 		}
 
