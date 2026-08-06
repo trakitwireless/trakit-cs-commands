@@ -9,7 +9,9 @@ namespace Trakit.Tools {
 	/// 
 	/// </summary>
 	public class ConvertAsset : TrakitConverter<Asset> {
-		public override Asset ConvertFrom(JsonReader reader, Type type, Asset asset, bool existing, JsonSerializer serializer) {
+		public ConvertAsset() : base(canRead: true, canWrite: false) { }
+
+		public override Asset ConvertFrom(JsonReader reader, Type type, Asset asset, JsonSerializer serializer) {
 			var obj = JObject.Load(reader);
 			if (
 				bool.TryParse(obj["deleted"]?.ToString(), out _)

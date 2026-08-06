@@ -8,7 +8,9 @@ namespace Trakit.Tools {
 	/// 
 	/// </summary>
 	public class ConvertPlace : TrakitConverter<Place> {
-		public override Place ConvertFrom(JsonReader reader, Type type, Place place, bool existing, JsonSerializer serializer) {
+		public ConvertPlace() : base(canRead: true, canWrite: false) { }
+
+		public override Place ConvertFrom(JsonReader reader, Type type, Place place, JsonSerializer serializer) {
 			var obj = JObject.Load(reader);
 			if (!Enum.TryParse(obj["kind"].ToString(), true, out PlaceType kind)) throw new JsonException();
 

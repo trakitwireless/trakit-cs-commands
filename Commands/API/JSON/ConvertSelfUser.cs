@@ -10,7 +10,9 @@ namespace Trakit.Tools {
 	/// 
 	/// </summary>
 	public class ConvertSelfUser : TrakitConverter<SelfUser> {
-		public override SelfUser ConvertFrom(JsonReader reader, Type type, SelfUser user, bool existing, JsonSerializer serializer) {
+		public ConvertSelfUser() : base(canRead: true, canWrite: false) { }
+
+		public override SelfUser ConvertFrom(JsonReader reader, Type type, SelfUser user, JsonSerializer serializer) {
 			var obj = JObject.Load(reader);
 			user = new SelfUser() {
 				General = obj.ToObject<SelfUserGeneral>(serializer),

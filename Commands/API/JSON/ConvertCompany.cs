@@ -9,7 +9,9 @@ namespace Trakit.Tools {
 	/// 
 	/// </summary>
 	public class ConvertCompany : TrakitConverter<Company> {
-		public override Company ConvertFrom(JsonReader reader, Type type, Company company, bool existing, JsonSerializer serializer) {
+		public ConvertCompany() : base(canRead: true, canWrite: false) { }
+
+		public override Company ConvertFrom(JsonReader reader, Type type, Company company, JsonSerializer serializer) {
 			var obj = JObject.Load(reader);
 			if (bool.TryParse(obj["deleted"]?.ToString(), out _)) {
 				company = new Company() {

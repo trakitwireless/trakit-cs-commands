@@ -9,6 +9,8 @@ namespace Trakit.Tools {
 	/// 
 	/// </summary>
 	public class ConvertTimezone : TrakitConverter<Timezone> {
+		public ConvertTimezone() : base(canRead: true, canWrite: true) { }
+
 		public static Timezone findById(string id) {
 			id = Text.Codify(id);
 			var zone = string.IsNullOrEmpty(id)
@@ -25,14 +27,13 @@ namespace Trakit.Tools {
 				};
 		}
 
-		public override Timezone ConvertFrom(JsonReader reader, Type type, Timezone tz, bool existing, JsonSerializer serializer) {
+		public override Timezone ConvertFrom(JsonReader reader, Type type, Timezone tz, JsonSerializer serializer) {
 			string code = reader.Value.ToString();
 			return ConvertTimezone.findById(code)
 				?? throw new TimeZoneNotFoundException(code + " not found");
 		}
-		public override void ConvertTo(JsonWriter writer, Timezone value, JsonSerializer serializer) {
-			var obj = new JValue(Text.Codify(value.code));
-			obj.WriteTo(writer);
-		}
+		public override void ConvertTo(JsonWriter writer, Timezone value, JsonSerializer serializer)
+			=> JValue.FromObject(Text.Codify(value.code)).WriteTo(writer);
+
 	}
 }

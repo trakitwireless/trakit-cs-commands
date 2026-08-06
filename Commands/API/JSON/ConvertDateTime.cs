@@ -9,16 +9,17 @@ namespace Trakit.Tools {
 	public class ConvertDateTime : TrakitConverter<DateTime> {
 		IsoDateTimeConverter _internal = new IsoDateTimeConverter();
 
+		public ConvertDateTime() : base(canRead: true, canWrite: true) { }
+
 		public override DateTime ConvertFrom(
 			JsonReader reader,
 			Type type,
 			DateTime value,
-			bool existing,
 			JsonSerializer serializer
 		) => (DateTime)_internal.ReadJson(
 			reader,
 			type,
-			existing,
+			value,
 			serializer
 		);
 		public override void ConvertTo(JsonWriter writer, DateTime value, JsonSerializer serializer) {
