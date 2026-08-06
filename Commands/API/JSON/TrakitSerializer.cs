@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace Trakit.Tools {
 	/// <summary>
@@ -15,6 +16,13 @@ namespace Trakit.Tools {
 		public TrakitSerializer() {
 			/// in general
 			_settings = new JsonSerializerSettings() {
+				ContractResolver = new DefaultContractResolver() {
+					NamingStrategy = new CamelCaseNamingStrategy() {
+						ProcessDictionaryKeys = false,
+						//OverrideSpecifiedNames = true,
+						//ProcessExtensionDataNames = true,
+					},
+				},
 				Formatting = Formatting.None,
 				DateParseHandling = DateParseHandling.None,
 				DateFormatHandling = DateFormatHandling.IsoDateFormat,
@@ -24,8 +32,9 @@ namespace Trakit.Tools {
 				/// and re-invoke the main (de)serialization behaviour because the <see cref="JsonSerializer"/>
 				/// keeps an internal stack of objects, and when a converter is by-passed, it detects the
 				/// second pass as "recursive". We ensure that there are no self-referencing objects in the
-				/// Trak-iT API, so this *should be* safe.
-				ReferenceLoopHandling = ReferenceLoopHandling.Serialize,   
+				/// Trak-iT API, so this *should be* safe, but just in case we also set a max depth.
+				ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+				MaxDepth = 128,
 			};
 			_settings.Converters.Add(new StringEnumConverter());
 			_settings.Converters.Add(new ConvertDateTime());
