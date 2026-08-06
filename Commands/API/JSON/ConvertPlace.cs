@@ -8,7 +8,7 @@ namespace Trakit.Tools {
 	/// 
 	/// </summary>
 	public class ConvertPlace : TrakitConverter<Place> {
-		public ConvertPlace() : base(canRead: true, canWrite: false) { }
+		public ConvertPlace() : base(canRead: true, canWrite: true) { }
 
 		public override Place ConvertFrom(JsonReader reader, Type type, Place place, JsonSerializer serializer) {
 			var obj = JObject.Load(reader);
@@ -22,6 +22,11 @@ namespace Trakit.Tools {
 			}
 			place = obj.ToObject<Place>(serializer);
 			return place;
+		}
+		public override void ConvertTo(JsonWriter writer, Place value, JsonSerializer serializer) {
+			var obj = JObject.FromObject(value, serializer);
+			if (value.points?.Length > 0) obj["points"] = Polyline.Encode(value.points);
+			obj.WriteTo(writer);
 		}
 	}
 }
