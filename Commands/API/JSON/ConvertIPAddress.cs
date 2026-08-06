@@ -8,7 +8,7 @@ namespace Trakit.Tools {
 	/// 
 	/// </summary>
 	public class ConvertIPAddress : TrakitConverter<IPAddress> {
-		public ConvertIPAddress() : base(true, true) { }
+		public ConvertIPAddress() : base(canRead: true, canWrite: true) { }
 
 		public override IPAddress ConvertFrom(JsonReader reader, Type type, IPAddress ipEnd, JsonSerializer serializer)
 			=> IPAddress.Parse(JToken.Load(reader).Value<string>());

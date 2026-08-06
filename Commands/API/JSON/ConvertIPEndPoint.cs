@@ -8,7 +8,7 @@ namespace Trakit.Tools {
 	/// 
 	/// </summary>
 	public class ConvertIPEndPoint : TrakitConverter<IPEndPoint> {
-		public ConvertIPEndPoint() : base(true, true) { }
+		public ConvertIPEndPoint() : base(canRead: true, canWrite: true) { }
 
 		public override IPEndPoint ConvertFrom(JsonReader reader, Type type, IPEndPoint ipEnd, JsonSerializer serializer) {
 			var token = JToken.Load(reader);

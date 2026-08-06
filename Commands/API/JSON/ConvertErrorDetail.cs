@@ -8,7 +8,7 @@ namespace Trakit.Tools {
 	/// 
 	/// </summary>
 	public class ConvertErrorDetail : TrakitConverter<ErrorDetail> {
-		public ConvertErrorDetail() : base(true, false) { }
+		public ConvertErrorDetail() : base(canRead: true, canWrite: false) { }
 
 		public override ErrorDetail ConvertFrom(JsonReader reader, Type type, ErrorDetail detail, JsonSerializer serializer) {
 			var obj = JObject.Load(reader);
