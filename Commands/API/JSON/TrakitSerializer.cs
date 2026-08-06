@@ -13,7 +13,7 @@ namespace Trakit.Tools {
 		/// used to convert <see cref="JObject"/>s into Trak-iT classes
 		JsonSerializer _serializer;
 
-		public TrakitSerializer() {
+		public TrakitSerializer(bool encodePlaceShapes = true) {
 			/// in general
 			_settings = new JsonSerializerSettings() {
 				ContractResolver = new DefaultContractResolver() {
@@ -47,7 +47,7 @@ namespace Trakit.Tools {
 			_settings.Converters.Add(new ConvertAsset());
 			_settings.Converters.Add(new ConvertCompany());
 			_settings.Converters.Add(new ConvertProvider());
-			_settings.Converters.Add(new ConvertPlace());
+			if (encodePlaceShapes) _settings.Converters.Add(new ConvertPlace());
 			_settings.Converters.Add(new ConvertUser());
 			_settings.Converters.Add(new ConvertTimezone());
 			_settings.Converters.Add(new ConvertIPAddress());
@@ -133,7 +133,7 @@ namespace Trakit.Tools {
 			}
 			return success;
 		}
-	
+
 		/// <summary>
 		/// Converts the given <paramref name="value"/> into a <see cref="JToken"/> abiding by the rules of Trak-iT's APIs.
 		/// </summary>
