@@ -9,7 +9,7 @@ namespace Trakit.Tools {
 	/// 
 	/// </summary>
 	public class ConvertUser : TrakitConverter<User> {
-		public ConvertUser() : base(canRead: true, canWrite: false) { }
+		public ConvertUser() : base(canRead: true, canWrite: true) { }
 
 		public override User ConvertFrom(JsonReader reader, Type type, User user, JsonSerializer serializer) {
 			var obj = JObject.Load(reader);
@@ -21,6 +21,23 @@ namespace Trakit.Tools {
 			};
 			user.v = obj["v"].Select(p => (int)p).ToArray();
 			return user;
+		}
+		public override void ConvertTo(JsonWriter writer, User value, JsonSerializer serializer) {
+			var obj = new JObject();
+			foreach (var pair in JObject.FromObject(value.General, serializer)) {
+				obj[pair.Key] = pair.Value;
+			}
+			foreach (var pair in JObject.FromObject(value.Advanced, serializer)) {
+				obj[pair.Key] = pair.Value;
+			}
+			foreach (var pair in JObject.FromObject(value.Authentication, serializer)) {
+				obj[pair.Key] = pair.Value;
+			}
+			foreach (var pair in JObject.FromObject(value.State, serializer)) {
+				obj[pair.Key] = pair.Value;
+			}
+			obj["v"] = JArray.FromObject(value.v, serializer);
+			obj.WriteTo(writer);
 		}
 	}
 }

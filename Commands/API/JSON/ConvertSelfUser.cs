@@ -10,7 +10,7 @@ namespace Trakit.Tools {
 	/// 
 	/// </summary>
 	public class ConvertSelfUser : TrakitConverter<SelfUser> {
-		public ConvertSelfUser() : base(canRead: true, canWrite: false) { }
+		public ConvertSelfUser() : base(canRead: true, canWrite: true) { }
 
 		public override SelfUser ConvertFrom(JsonReader reader, Type type, SelfUser user, JsonSerializer serializer) {
 			var obj = JObject.Load(reader);
@@ -23,6 +23,25 @@ namespace Trakit.Tools {
 			};
 			user.v = obj["v"].Select(p => (int)p).ToArray();
 			return user;
+		}
+		public override void ConvertTo(JsonWriter writer, SelfUser value, JsonSerializer serializer) {
+			var obj = new JObject();
+			foreach (var pair in JObject.FromObject(value.General, serializer)) {
+				obj[pair.Key] = pair.Value;
+			}
+			foreach (var pair in JObject.FromObject(value.Advanced, serializer)) {
+				obj[pair.Key] = pair.Value;
+			}
+			foreach (var pair in JObject.FromObject(value.Authentication, serializer)) {
+				obj[pair.Key] = pair.Value;
+			}
+			foreach (var pair in JObject.FromObject(value.State, serializer)) {
+				obj[pair.Key] = pair.Value;
+			}
+			obj["policies"] = JObject.FromObject(value.policy, serializer);
+			obj["v"] = JArray.FromObject(value.v, serializer);
+			obj.WriteTo(writer);
+
 		}
 	}
 }

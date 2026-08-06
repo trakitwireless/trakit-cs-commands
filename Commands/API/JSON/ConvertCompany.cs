@@ -31,5 +31,23 @@ namespace Trakit.Tools {
 			}
 			return company;
 		}
+		public override void ConvertTo(JsonWriter writer, Company value, JsonSerializer serializer) {
+			var obj = new JObject();
+			foreach (var pair in JObject.FromObject(value.General, serializer)) {
+				obj[pair.Key] = pair.Value;
+			}
+			foreach (var pair in JObject.FromObject(value.Directory, serializer)) {
+				obj[pair.Key] = pair.Value;
+			}
+			foreach (var pair in JObject.FromObject(value.Policy, serializer)) {
+				obj[pair.Key] = pair.Value;
+			}
+			foreach (var pair in JObject.FromObject(value.Style, serializer)) {
+				obj[pair.Key] = pair.Value;
+			}
+			obj["reseller"] = JObject.FromObject(value.Reseller, serializer);
+			obj["v"] = JArray.FromObject(value.v, serializer);
+			obj.WriteTo(writer);
+		}
 	}
 }

@@ -9,7 +9,7 @@ namespace Trakit.Tools {
 	/// 
 	/// </summary>
 	public class ConvertProvider : TrakitConverter<Provider> {
-		public ConvertProvider() : base(canRead: true, canWrite: false) { }
+		public ConvertProvider() : base(canRead: true, canWrite: true) { }
 
 		public override Provider ConvertFrom(JsonReader reader, Type type, Provider provider, JsonSerializer serializer) {
 			var obj = JObject.Load(reader);

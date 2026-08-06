@@ -9,7 +9,7 @@ namespace Trakit.Tools {
 	/// 
 	/// </summary>
 	public class ConvertAsset : TrakitConverter<Asset> {
-		public ConvertAsset() : base(canRead: true, canWrite: false) { }
+		public ConvertAsset() : base(canRead: true, canWrite: true) { }
 
 		public override Asset ConvertFrom(JsonReader reader, Type type, Asset asset, JsonSerializer serializer) {
 			var obj = JObject.Load(reader);
@@ -31,6 +31,18 @@ namespace Trakit.Tools {
 				asset.v = obj["v"].Select(p => (int)p).ToArray();
 			}
 			return asset;
+		}
+		public override void ConvertTo(JsonWriter writer, Asset value, JsonSerializer serializer) {
+			var obj = new JObject();
+			foreach (var pair in JObject.FromObject(value.General, serializer)) {
+				obj[pair.Key] = pair.Value;
+			}
+			foreach (var pair in JObject.FromObject(value.Advanced, serializer)) {
+				obj[pair.Key] = pair.Value;
+			}
+			obj["dispatch"] = JObject.FromObject(value.dispatch, serializer);
+			obj["v"] = JArray.FromObject(value.v, serializer);
+			obj.WriteTo(writer);
 		}
 	}
 }
