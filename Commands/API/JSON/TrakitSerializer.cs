@@ -20,6 +20,12 @@ namespace Trakit.Tools {
 				DateFormatHandling = DateFormatHandling.IsoDateFormat,
 				DateTimeZoneHandling = DateTimeZoneHandling.Utc,
 				NullValueHandling = NullValueHandling.Ignore,
+				/// This is added so that the <see cref="TrakitConverter{T}"/> classes can disable themselves
+				/// and re-invoke the main (de)serialization behaviour because the <see cref="JsonSerializer"/>
+				/// keeps an internal stack of objects, and when a converter is by-passed, it detects the
+				/// second pass as "recursive". We ensure that there are no self-referencing objects in the
+				/// Trak-iT API, so this *should be* safe.
+				ReferenceLoopHandling = ReferenceLoopHandling.Serialize,   
 			};
 			_settings.Converters.Add(new StringEnumConverter());
 			_settings.Converters.Add(new ConvertDateTime());
